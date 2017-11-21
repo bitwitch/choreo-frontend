@@ -1,26 +1,23 @@
 import React from 'react'; 
 import { Layer, Circle } from 'react-konva'; 
 
-class JointLayer extends React.Component {
+const JointLayer = (props) => {
 
   // shouldComponentUpdate(nextProps, nextState) { // CAN UNCOMMENT TO PREVENT RERENDERING JOINTS IF PERFORMANCE NEEDED
-  //   return false; 
+  //   return false;                               // Component will need to be changed back to a class 
   // }
 
-  renderJoints = () => {
-    const joints = this.props.joints;
+  const renderJoints = () => {
+    const joints = props.joints;
     const jointElements = [];
     for(let jointName in joints) {
-      jointElements.push(this.buildJoint({name: jointName, ...joints[jointName]}))
+      jointElements.push(buildJoint({name: jointName, ...joints[jointName]}))
     }
-    // return this.props.joints.map(joint => (
-    //   this.buildJoint(joint)
-    // ));
 
     return jointElements;
   }
 
-  buildJoint = ({name, x, y}) => {
+  const buildJoint = ({name, x, y}) => {
     return <Circle
       name={name}
       x={x}
@@ -30,34 +27,57 @@ class JointLayer extends React.Component {
       fill='#dddddd'
       strokeWidth={2}
       draggable={true}
-      onDragMove={this.onDragMove}
-      onMouseOver={this.onMouseOver}
-      onMouseOut={this.onMouseOut}
+      dragBoundFunc={dragBound}
+      onDragMove={onDragMove}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
     />;
   }
 
- onMouseOver = () => {
+  const onMouseOver = () => {
     document.body.style.cursor = 'pointer';
   }
 
-  onMouseOut = () => {
+  const onMouseOut = () => {
     document.body.style.cursor = 'default';
   }
 
-  onDragMove = (e) => {
+  const onDragMove = (e) => {
     const {name, x, y} = e.target.attrs;
-    // dispatch a moveJoint action 
-    this.props.moveJoint(name, x, y); 
+    props.moveJoint(name, x, y); 
   }
 
-  render() {
-    console.log('rendering')
-    return (
-      <Layer>
-        {this.renderJoints()}
-      </Layer> 
-    )
+  const dragBound = (pos) => {
+    let newX, newY; 
+  
+    if (pos.x < 5) {
+      newX = 5;
+    } else if (pos.x > 295) {
+      newX = 295; 
+    } else {
+      newX = pos.x;
+    }
+
+    if (pos.y < 5) {
+      newY = 5;
+    } else if (pos.y > 295) {
+      newY = 295; 
+    } else {
+      newY = pos.y;
+    }
+
+    return {
+      x: newX, 
+      y: newY  
+    }
   }
+
+  return (
+    <Layer>
+      {renderJoints()}
+    </Layer> 
+  )
+  
 }; 
 
 export default JointLayer;
