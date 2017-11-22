@@ -1,27 +1,28 @@
 import React from 'react'; 
 import { Layer, Circle } from 'react-konva'; 
 
-const JointLayer = (props) => {
+class JointLayer extends React.Component {
 
-  // shouldComponentUpdate(nextProps, nextState) { // CAN UNCOMMENT TO PREVENT RERENDERING JOINTS IF PERFORMANCE NEEDED
-  //   return false;                               // Component will need to be changed back to a class 
+  // shouldComponentUpdate(nextProps, nextState) { // CAN UNCOMMENT AND ADD CONDITIONS TO PREVENT 
+  //   return false;                               // RERENDERING JOINTS IF PERFORMANCE NEEDED
   // }
 
-  const renderJoints = () => {
-    const joints = props.joints;
+  renderJoints = () => {
+    const joints = this.props.joints;
     const jointElements = [];
     let i = 0; 
     
     for(let jointName in joints) {
-      jointElements.push(buildJoint(++i, {name: jointName, ...joints[jointName]}))
+      jointElements.push(this.buildJoint(++i, {name: jointName, ...joints[jointName]}))
     }
     return jointElements;
   }
 
-  const buildJoint = (key, {name, x, y}) => {
+  buildJoint = (key, {name, x, y}) => {
     return <Circle
       key={key}
       name={name}
+      ref={name}
       x={x}
       y={y}
       radius={7}
@@ -29,77 +30,111 @@ const JointLayer = (props) => {
       fill='#dddddd'
       strokeWidth={2}
       draggable={true}
-      dragBoundFunc={dragBound}
-      onDragMove={onDragMove}
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
+      findPivotPos={this.findPivotPos}
+      dragBoundFunc={this.dragBound}
+      onDragMove={this.onDragMove}
+      onMouseOver={this.onMouseOver}
+      onMouseOut={this.onMouseOut}
     />;
   }
 
-  const onMouseOver = () => {
+  onMouseOver = () => {
     document.body.style.cursor = 'pointer';
   }
 
-  const onMouseOut = () => {
+  onMouseOut = () => {
     document.body.style.cursor = 'default';
   }
 
-  const onDragMove = (e) => {
+  onDragMove = (e) => {
     const {name, x, y} = e.target.attrs;
     const {movementX, movementY} = e.evt;
 
     switch(name) {
       case 'headBottom':
-        props.moveJoint('headTop', movementX + props.joints.headTop.x, movementY + props.joints.headTop.y);
+        this.props.moveJoint('headTop', movementX + this.props.joints.headTop.x, movementY + this.props.joints.headTop.y);
         break;
       case 'pelvis':
-        props.moveJoint('neck', movementX + props.joints.neck.x, movementY + props.joints.neck.y);
-        props.moveJoint('hipLeft', movementX + props.joints.hipLeft.x, movementY + props.joints.hipLeft.y);
-        props.moveJoint('kneeLeft', movementX + props.joints.kneeLeft.x, movementY + props.joints.kneeLeft.y);
-        props.moveJoint('footLeft', movementX + props.joints.footLeft.x, movementY + props.joints.footLeft.y);
-        props.moveJoint('hipRight', movementX + props.joints.hipRight.x, movementY + props.joints.hipRight.y);
-        props.moveJoint('kneeRight', movementX + props.joints.kneeRight.x, movementY + props.joints.kneeRight.y);
-        props.moveJoint('footRight', movementX + props.joints.footRight.x, movementY + props.joints.footRight.y);
+        this.props.moveJoint('neck', movementX + this.props.joints.neck.x, movementY + this.props.joints.neck.y);
+        this.props.moveJoint('hipLeft', movementX + this.props.joints.hipLeft.x, movementY + this.props.joints.hipLeft.y);
+        this.props.moveJoint('kneeLeft', movementX + this.props.joints.kneeLeft.x, movementY + this.props.joints.kneeLeft.y);
+        this.props.moveJoint('footLeft', movementX + this.props.joints.footLeft.x, movementY + this.props.joints.footLeft.y);
+        this.props.moveJoint('hipRight', movementX + this.props.joints.hipRight.x, movementY + this.props.joints.hipRight.y);
+        this.props.moveJoint('kneeRight', movementX + this.props.joints.kneeRight.x, movementY + this.props.joints.kneeRight.y);
+        this.props.moveJoint('footRight', movementX + this.props.joints.footRight.x, movementY + this.props.joints.footRight.y);
       case 'neck': 
-        props.moveJoint('headTop', movementX + props.joints.headTop.x, movementY + props.joints.headTop.y);
-        props.moveJoint('headBottom', movementX + props.joints.headBottom.x, movementY + props.joints.headBottom.y);
-        props.moveJoint('shoulderLeft', movementX + props.joints.shoulderLeft.x, movementY + props.joints.shoulderLeft.y);
-        props.moveJoint('elbowLeft', movementX + props.joints.elbowLeft.x, movementY + props.joints.elbowLeft.y);
-        props.moveJoint('handLeft', movementX + props.joints.handLeft.x, movementY + props.joints.handLeft.y);
-        props.moveJoint('shoulderRight', movementX + props.joints.shoulderRight.x, movementY + props.joints.shoulderRight.y);
-        props.moveJoint('elbowRight', movementX + props.joints.elbowRight.x, movementY + props.joints.elbowRight.y);
-        props.moveJoint('handRight', movementX + props.joints.handRight.x, movementY + props.joints.handRight.y);
+        this.props.moveJoint('headTop', movementX + this.props.joints.headTop.x, movementY + this.props.joints.headTop.y);
+        this.props.moveJoint('headBottom', movementX + this.props.joints.headBottom.x, movementY + this.props.joints.headBottom.y);
+        this.props.moveJoint('shoulderLeft', movementX + this.props.joints.shoulderLeft.x, movementY + this.props.joints.shoulderLeft.y);
+        this.props.moveJoint('elbowLeft', movementX + this.props.joints.elbowLeft.x, movementY + this.props.joints.elbowLeft.y);
+        this.props.moveJoint('handLeft', movementX + this.props.joints.handLeft.x, movementY + this.props.joints.handLeft.y);
+        this.props.moveJoint('shoulderRight', movementX + this.props.joints.shoulderRight.x, movementY + this.props.joints.shoulderRight.y);
+        this.props.moveJoint('elbowRight', movementX + this.props.joints.elbowRight.x, movementY + this.props.joints.elbowRight.y);
+        this.props.moveJoint('handRight', movementX + this.props.joints.handRight.x, movementY + this.props.joints.handRight.y);
         break;
 
       case 'shoulderLeft':
-        props.moveJoint('elbowLeft', movementX + props.joints.elbowLeft.x, movementY + props.joints.elbowLeft.y);
+        this.props.moveJoint('elbowLeft', movementX + this.props.joints.elbowLeft.x, movementY + this.props.joints.elbowLeft.y);
       case 'elbowLeft': 
-        props.moveJoint('handLeft', movementX + props.joints.handLeft.x, movementY + props.joints.handLeft.y);
+        this.props.moveJoint('handLeft', movementX + this.props.joints.handLeft.x, movementY + this.props.joints.handLeft.y);
         break;
       case 'hipLeft':
-        props.moveJoint('kneeLeft', movementX + props.joints.kneeLeft.x, movementY + props.joints.kneeLeft.y);
+        this.props.moveJoint('kneeLeft', movementX + this.props.joints.kneeLeft.x, movementY + this.props.joints.kneeLeft.y);
       case 'kneeLeft': 
-        props.moveJoint('footLeft', movementX + props.joints.footLeft.x, movementY + props.joints.footLeft.y);
+        this.props.moveJoint('footLeft', movementX + this.props.joints.footLeft.x, movementY + this.props.joints.footLeft.y);
         break;
 
       case 'shoulderRight':
-        props.moveJoint('elbowRight', movementX + props.joints.elbowRight.x, movementY + props.joints.elbowRight.y);
+        this.props.moveJoint('elbowRight', movementX + this.props.joints.elbowRight.x, movementY + this.props.joints.elbowRight.y);
       case 'elbowRight': 
-        props.moveJoint('handRight', movementX + props.joints.handRight.x, movementY + props.joints.handRight.y);
+        this.props.moveJoint('handRight', movementX + this.props.joints.handRight.x, movementY + this.props.joints.handRight.y);
         break;
       case 'hipRight':
-        props.moveJoint('kneeRight', movementX + props.joints.kneeRight.x, movementY + props.joints.kneeRight.y);
+        this.props.moveJoint('kneeRight', movementX + this.props.joints.kneeRight.x, movementY + this.props.joints.kneeRight.y);
       case 'kneeRight': 
-        props.moveJoint('footRight', movementX + props.joints.footRight.x, movementY + props.joints.footRight.y);
+        this.props.moveJoint('footRight', movementX + this.props.joints.footRight.x, movementY + this.props.joints.footRight.y);
         break;
-
+      default: break;
     }
 
-    props.moveJoint(name, x, y); 
+    this.props.moveJoint(name, x, y); 
   }
 
-  const dragBound = (pos) => {
+
+  findDist = (x1, y1, x2, y2) => {
+    return Math.floor(Math.sqrt( (Math.abs(x2 - x1)**2 + (Math.abs(y2 - y1)**2) )));
+  }
+
+  // const distanceCheck = (bodyPart, start, stop) => {
+  //   const dist = findDist(start, stop); 
+  //   let maxDist;
+  //   if (bodyPart === 'armLeft' || bodyPart === 'armRight') {
+  //     maxDist = 100; 
+  //   }
+  // }
+
+  findPivotPos = (jointName, x, y) => {
+    let pivotX, pivotY, dist;
+
+    switch(jointName) {
+      case 'headTop': 
+        pivotX = this.props.joints.headBottom.x;
+        pivotY = this.props.joints.headBottom.y;
+        return {x: pivotX, y: pivotY}
+    }
+
+    return true;
+  }
+
+  dragBound = function(pos) {
     let newX, newY; 
+
+    // const pivotPos = this.attrs.findPivotPos(this.attrs.name, pos.x, pos.y);
+
+    // Find pivot position 
+    // if the distance from the current joint to its pivot is greater than the length of the appendage
+      // dont let the joint move any more
+    // else proceed 
 
     if (pos.x < 5) {
       newX = 5;
@@ -123,12 +158,13 @@ const JointLayer = (props) => {
     }
   }
 
-  return (
-    <Layer>
-      {renderJoints()}
-    </Layer> 
-  )
-  
+  render() {
+    return (
+      <Layer>
+        {this.renderJoints()}
+      </Layer> 
+    );
+  }
 }; 
 
 export default JointLayer;

@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Stage, Layer, Line } from 'react-konva'; 
+import { Stage, Layer } from 'react-konva'; 
 
 class Pose extends React.Component {
   render() {

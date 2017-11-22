@@ -11,7 +11,7 @@ class PoseList extends React.Component {
 
   render() {
     return (
-      <ul> 
+      <ul style={{'listStyle': 'none'}}> 
         {this.renderPoses()}
       </ul>
     )

@@ -1,20 +1,20 @@
 const defaultState = {
-  handLeft: { x: 100, y: 138 },
-  elbowLeft: { x: 111, y: 99 },
-  shoulderLeft: { x: 118, y: 53 },
-  hipLeft: { x: 130, y: 137 },
-  kneeLeft: { x: 118, y: 192 },
-  footLeft: { x: 117, y: 246 },
-  handRight: { x: 207, y: 138 },
-  elbowRight: { x: 193, y: 95 },
-  shoulderRight: { x: 193, y: 54 },
-  hipRight: { x: 178, y: 137 },
-  kneeRight: { x: 197, y: 192 },
-  footRight: { x: 199, y: 249 },
-  headTop: { x: 155, y: 12 },
-  headBottom: { x: 155, y: 42 },
-  neck: { x: 155, y: 50 },
-  pelvis: { x: 153, y: 137 }
+  headTop: { x: 150, y: 15 },
+  headBottom: { x: 150, y: 35 },
+  neck: { x: 150, y: 45 },
+  shoulderLeft: { x: 125, y: 47 },
+  shoulderRight: { x: 175, y: 47 },
+  elbowLeft: { x: 119, y: 109},
+  elbowRight: { x: 181, y: 109 },
+  handLeft: { x: 110, y: 170 },
+  handRight: { x: 190, y: 170 },
+  pelvis: { x: 150, y: 140 },
+  hipLeft: { x: 125, y: 140 },
+  hipRight: { x: 175, y: 140 },
+  kneeLeft: { x: 135, y: 218 },
+  kneeRight: { x: 165, y: 218 },
+  footLeft: { x: 135, y: 285 },
+  footRight: { x: 165, y: 285 }
 };
 
 export default function jointReducer(state=defaultState, action) {
