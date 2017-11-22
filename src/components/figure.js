@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Stage, Layer, Circle } from 'react-konva'; 
+import { Stage } from 'react-konva'; 
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import JointLayer from './JointLayer';
@@ -8,21 +8,21 @@ import moveJoint from '../actions/joints'
 
 const Figure = (props) => {
 
-  const findDist = (start, stop) => {
-    return Math.floor(Math.sqrt( (Math.abs(stop.x - start.x)**2 + (Math.abs(stop.y - start.y)**2) )));
-  }
+  // const findDist = (start, stop) => {
+  //   return Math.floor(Math.sqrt( (Math.abs(stop.x - start.x)**2 + (Math.abs(stop.y - start.y)**2) )));
+  // }
 
-  const distanceCheck = (bodyPart, start, stop) => {
-    const dist = findDist(start, stop); 
-    let maxDist;
-    if (bodyPart === 'armLeft' || bodyPart === 'armRight') {
-      maxDist = 100; 
-    }
-  }
+  // const distanceCheck = (bodyPart, start, stop) => {
+  //   const dist = findDist(start, stop); 
+  //   let maxDist;
+  //   if (bodyPart === 'armLeft' || bodyPart === 'armRight') {
+  //     maxDist = 100; 
+  //   }
+  // }
 
   return (
     <Stage width={300} height={300}> 
-      <LineLayer joints={props.joints} />
+      <LineLayer joints={props.joints} setCurrentPose={props.setCurrentPose} />
       <JointLayer moveJoint={props.moveJoint} joints={props.joints} />
     </Stage>
   )

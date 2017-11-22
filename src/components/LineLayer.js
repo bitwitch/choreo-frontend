@@ -14,6 +14,7 @@ const LineLayer = (props) => {
       lines.push(<Line key={++i} points={points} stroke='#000' strokeWidth={4} />)
     }
 
+    props.setCurrentPose(lines);
     return lines;
   }
 

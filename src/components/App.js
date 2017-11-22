@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { login } from '../services/choreoBackendApi';
-import Figure from './figure';
+import FigureContainer from '../containers/FigureContainer';
+import ChoreographyContainer from '../containers/ChoreographyContainer';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Figure />
-      </div>
-    );
-  }
+const App = (props) => {
+  return (
+    <div className="App">
+      <FigureContainer />
+      <ChoreographyContainer />
+    </div>
+  );
 }
 
 export default App;
