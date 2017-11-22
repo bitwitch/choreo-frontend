@@ -60,3 +60,22 @@ export const bodyMap = {
     stop: 'pelvis'
   }
 };
+
+export const jointChildren = {
+  headTop: [],
+  headBottom: ['headTop'],
+  neck: ['headTop', 'headBottom', 'shoulderLeft', 'shoulderRight', 'elbowLeft', 'elbowRight', 'handLeft', 'handRight'],
+  shoulderLeft: ['elbowLeft', 'handLeft'],
+  shoulderRight: ['elbowRight', 'handRight'],
+  elbowLeft: ['handLeft'],
+  elbowRight: ['handRight'],
+  handLeft: [],
+  handRight: [],
+  pelvis: ['headTop', 'headBottom', 'neck', 'handLeft', 'elbowLeft', 'shoulderLeft', 'hipLeft', 'kneeLeft', 'footLeft', 'handRight', 'elbowRight', 'shoulderRight', 'hipRight', 'kneeRight', 'footRight'],
+  hipLeft: ['kneeLeft', 'footLeft'],
+  hipRight: ['kneeRight', 'footRight'],
+  kneeLeft: ['footLeft'],
+  kneeRight: ['footRight'],
+  footLeft: [],
+  footRight: []
+};

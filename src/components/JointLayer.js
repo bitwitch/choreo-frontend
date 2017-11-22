@@ -1,11 +1,15 @@
 import React from 'react'; 
 import { Layer, Circle } from 'react-konva'; 
+import { jointChildren } from '../data/bodyPartsJointsMap';
 
 class JointLayer extends React.Component {
-
   // shouldComponentUpdate(nextProps, nextState) { // CAN UNCOMMENT AND ADD CONDITIONS TO PREVENT 
   //   return false;                               // RERENDERING JOINTS IF PERFORMANCE NEEDED
   // }
+
+  state = {
+    dragStartDist: {}
+  }
 
   renderJoints = () => {
     const joints = this.props.joints;
@@ -33,6 +37,8 @@ class JointLayer extends React.Component {
       findPivot={this.findPivot}
       dragBoundFunc={this.dragBound}
       onDragMove={this.onDragMove}
+      onDragStart={this.onDragStart}
+      onDragEnd={this.onDragEnd}
       onMouseOver={this.onMouseOver}
       onMouseOut={this.onMouseOut}
     />;
@@ -46,61 +52,40 @@ class JointLayer extends React.Component {
     document.body.style.cursor = 'default';
   }
 
+  onDragStart = (e) => {
+    const {name, x, y} = e.target.attrs;
+    if (name === 'footLeft' || name === 'footRight' || name === 'handLeft' || name === 'handRight' || name === 'headTop') {
+      return false; 
+    }
+
+    const newState = {};
+    jointChildren[name].forEach (child => {
+      const distX = this.props.joints[child].x - x;
+      const distY = this.props.joints[child].y - y;
+      newState[child] = {x: distX, y: distY}; 
+    });
+
+    this.setState({
+      dragStartDist: newState
+    });
+  }
+
+  onDragEnd = () => {
+    this.setState({
+      dragStartDist: {}
+    });
+  }
+
   onDragMove = (e) => {
     const {name, x, y} = e.target.attrs;
-    const {movementX, movementY} = e.evt;
-    let pivot, scale; 
+    const dist = this.state.dragStartDist;
 
-    switch(name) {
-      case 'headBottom':
-        this.props.moveJoint('headTop', movementX + this.props.joints.headTop.x, movementY + this.props.joints.headTop.y);
-        break;
-      case 'pelvis':
-        this.props.moveJoint('neck', movementX + this.props.joints.neck.x, movementY + this.props.joints.neck.y);
-        this.props.moveJoint('hipLeft', movementX + this.props.joints.hipLeft.x, movementY + this.props.joints.hipLeft.y);
-        this.props.moveJoint('kneeLeft', movementX + this.props.joints.kneeLeft.x, movementY + this.props.joints.kneeLeft.y);
-        this.props.moveJoint('footLeft', movementX + this.props.joints.footLeft.x, movementY + this.props.joints.footLeft.y);
-        this.props.moveJoint('hipRight', movementX + this.props.joints.hipRight.x, movementY + this.props.joints.hipRight.y);
-        this.props.moveJoint('kneeRight', movementX + this.props.joints.kneeRight.x, movementY + this.props.joints.kneeRight.y);
-        this.props.moveJoint('footRight', movementX + this.props.joints.footRight.x, movementY + this.props.joints.footRight.y);
-      case 'neck': 
-        this.props.moveJoint('headTop', movementX + this.props.joints.headTop.x, movementY + this.props.joints.headTop.y);
-        this.props.moveJoint('headBottom', movementX + this.props.joints.headBottom.x, movementY + this.props.joints.headBottom.y);
-        this.props.moveJoint('shoulderLeft', movementX + this.props.joints.shoulderLeft.x, movementY + this.props.joints.shoulderLeft.y);
-        this.props.moveJoint('elbowLeft', movementX + this.props.joints.elbowLeft.x, movementY + this.props.joints.elbowLeft.y);
-        this.props.moveJoint('handLeft', movementX + this.props.joints.handLeft.x, movementY + this.props.joints.handLeft.y);
-        this.props.moveJoint('shoulderRight', movementX + this.props.joints.shoulderRight.x, movementY + this.props.joints.shoulderRight.y);
-        this.props.moveJoint('elbowRight', movementX + this.props.joints.elbowRight.x, movementY + this.props.joints.elbowRight.y);
-        this.props.moveJoint('handRight', movementX + this.props.joints.handRight.x, movementY + this.props.joints.handRight.y);
-        break;
-
-      case 'shoulderLeft':
-        this.props.moveJoint('elbowLeft', movementX + this.props.joints.elbowLeft.x, movementY + this.props.joints.elbowLeft.y);
-      case 'elbowLeft': 
-        this.props.moveJoint('handLeft', movementX + this.props.joints.handLeft.x, movementY + this.props.joints.handLeft.y);
-        break;
-      case 'hipLeft':
-        this.props.moveJoint('kneeLeft', movementX + this.props.joints.kneeLeft.x, movementY + this.props.joints.kneeLeft.y);
-      case 'kneeLeft': 
-        this.props.moveJoint('footLeft', movementX + this.props.joints.footLeft.x, movementY + this.props.joints.footLeft.y);
-        break;
-
-      case 'shoulderRight':
-        this.props.moveJoint('elbowRight', movementX + this.props.joints.elbowRight.x, movementY + this.props.joints.elbowRight.y);
-      case 'elbowRight': 
-        this.props.moveJoint('handRight', movementX + this.props.joints.handRight.x, movementY + this.props.joints.handRight.y);
-        break;
-      case 'hipRight':
-        this.props.moveJoint('kneeRight', movementX + this.props.joints.kneeRight.x, movementY + this.props.joints.kneeRight.y);
-      case 'kneeRight': 
-        this.props.moveJoint('footRight', movementX + this.props.joints.footRight.x, movementY + this.props.joints.footRight.y);
-        break;
-      default: break;
-    }
+    jointChildren[name].forEach(child => {
+      this.props.moveJoint(child, dist[child].x + this.props.joints[name].x, dist[child].y + this.props.joints[name].y);
+    });
 
     this.props.moveJoint(name, x, y); 
   }
-
 
   findPivot = (jointName) => {
     let pivotX, pivotY, radius;
@@ -173,6 +158,9 @@ class JointLayer extends React.Component {
         pivotY = this.props.joints.kneeRight.y;
         radius = 67; 
         break;
+      default: 
+        console.log('invalid joint from findPivot() in JointLayer.js')
+        break;
     }
 
     return {x: pivotX, y: pivotY, radius: radius}
@@ -189,7 +177,7 @@ class JointLayer extends React.Component {
     const pivot = this.attrs.findPivot(this.attrs.name);
     const scale = pivot.radius / Math.sqrt(Math.pow(pos.x - pivot.x, 2) + Math.pow(pos.y - pivot.y, 2));
 
-    if(scale !== 1) {
+    if(scale !== 1 && this.attrs.name !== 'pelvis') {
       return {
         y: Math.round((pos.y - pivot.y) * scale + pivot.y),
         x: Math.round((pos.x - pivot.x) * scale + pivot.x)
