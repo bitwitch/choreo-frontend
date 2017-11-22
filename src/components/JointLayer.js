@@ -30,7 +30,7 @@ class JointLayer extends React.Component {
       fill='#dddddd'
       strokeWidth={2}
       draggable={true}
-      findPivotPos={this.findPivotPos}
+      findPivot={this.findPivot}
       dragBoundFunc={this.dragBound}
       onDragMove={this.onDragMove}
       onMouseOver={this.onMouseOver}
@@ -49,6 +49,7 @@ class JointLayer extends React.Component {
   onDragMove = (e) => {
     const {name, x, y} = e.target.attrs;
     const {movementX, movementY} = e.evt;
+    let pivot, scale; 
 
     switch(name) {
       case 'headBottom':
@@ -101,60 +102,119 @@ class JointLayer extends React.Component {
   }
 
 
-  findDist = (x1, y1, x2, y2) => {
-    return Math.floor(Math.sqrt( (Math.abs(x2 - x1)**2 + (Math.abs(y2 - y1)**2) )));
-  }
-
-  // const distanceCheck = (bodyPart, start, stop) => {
-  //   const dist = findDist(start, stop); 
-  //   let maxDist;
-  //   if (bodyPart === 'armLeft' || bodyPart === 'armRight') {
-  //     maxDist = 100; 
-  //   }
-  // }
-
-  findPivotPos = (jointName, x, y) => {
-    let pivotX, pivotY, dist;
+  findPivot = (jointName) => {
+    let pivotX, pivotY, radius;
 
     switch(jointName) {
       case 'headTop': 
         pivotX = this.props.joints.headBottom.x;
         pivotY = this.props.joints.headBottom.y;
-        return {x: pivotX, y: pivotY}
+        radius = 20; 
+        break;
+      case 'headBottom': 
+        pivotX = this.props.joints.neck.x;
+        pivotY = this.props.joints.neck.y;
+        radius = 10; 
+        break;
+      case 'neck': 
+        pivotX = this.props.joints.pelvis.x;
+        pivotY = this.props.joints.pelvis.y;
+        radius = 95;
+        break; 
+      case 'shoulderLeft': 
+      case 'shoulderRight':
+        pivotX = this.props.joints.neck.x;
+        pivotY = this.props.joints.neck.y;
+        radius = 24; 
+        break;
+      case 'elbowLeft':
+        pivotX = this.props.joints.shoulderLeft.x;
+        pivotY = this.props.joints.shoulderLeft.y;
+        radius = 62; 
+        break;
+      case 'elbowRight':
+        pivotX = this.props.joints.shoulderRight.x;
+        pivotY = this.props.joints.shoulderRight.y;
+        radius = 62; 
+        break;
+      case 'handLeft': 
+        pivotX = this.props.joints.elbowLeft.x;
+        pivotY = this.props.joints.elbowLeft.y;
+        radius = 62; 
+        break;
+      case 'handRight':
+        pivotX = this.props.joints.elbowRight.x;
+        pivotY = this.props.joints.elbowRight.y;
+        radius = 62; 
+        break;
+      case 'hipLeft':
+      case 'hipRight':
+        pivotX = this.props.joints.pelvis.x;
+        pivotY = this.props.joints.pelvis.y;
+        radius = 25; 
+        break;
+      case 'kneeLeft':
+        pivotX = this.props.joints.hipLeft.x;
+        pivotY = this.props.joints.hipLeft.y;
+        radius = 79; 
+        break;
+      case 'kneeRight':
+        pivotX = this.props.joints.hipRight.x;
+        pivotY = this.props.joints.hipRight.y;
+        radius = 79; 
+        break;
+      case 'footLeft':
+        pivotX = this.props.joints.kneeLeft.x;
+        pivotY = this.props.joints.kneeLeft.y;
+        radius = 67; 
+        break;
+      case 'footRight':
+        pivotX = this.props.joints.kneeRight.x;
+        pivotY = this.props.joints.kneeRight.y;
+        radius = 67; 
+        break;
     }
 
-    return true;
+    return {x: pivotX, y: pivotY, radius: radius}
   }
 
   dragBound = function(pos) {
-    let newX, newY; 
-
-    // const pivotPos = this.attrs.findPivotPos(this.attrs.name, pos.x, pos.y);
-
-    // Find pivot position 
+     // Find pivot position 
     // if the distance from the current joint to its pivot is greater than the length of the appendage
       // dont let the joint move any more
+      // in other words, draw a boundary around the pivot the length of the appendage 
     // else proceed 
 
-    if (pos.x < 5) {
-      newX = 5;
-    } else if (pos.x > 295) {
-      newX = 295; 
-    } else {
-      newX = pos.x;
-    }
+    let newX, newY; 
+    const pivot = this.attrs.findPivot(this.attrs.name);
+    const scale = pivot.radius / Math.sqrt(Math.pow(pos.x - pivot.x, 2) + Math.pow(pos.y - pivot.y, 2));
 
-    if (pos.y < 5) {
-      newY = 5;
-    } else if (pos.y > 295) {
-      newY = 295; 
+    if(scale !== 1) {
+      return {
+        y: Math.round((pos.y - pivot.y) * scale + pivot.y),
+        x: Math.round((pos.x - pivot.x) * scale + pivot.x)
+      }
     } else {
-      newY = pos.y;
-    }
+      if (pos.x < 5) {
+        newX = 5;
+      } else if (pos.x > 295) {
+        newX = 295; 
+      } else {
+        newX = pos.x;
+      }
 
-    return {
-      x: newX, 
-      y: newY  
+      if (pos.y < 5) {
+        newY = 5;
+      } else if (pos.y > 295) {
+        newY = 295; 
+      } else {
+        newY = pos.y;
+      }
+
+      return {
+        x: newX, 
+        y: newY  
+      }
     }
   }
 
