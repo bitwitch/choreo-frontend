@@ -43,7 +43,7 @@ class JointLayer extends React.Component {
       onMouseOut={this.onMouseOut}
     />;
   }
-
+  
   onMouseOver = () => {
     document.body.style.cursor = 'pointer';
   }
@@ -91,41 +91,41 @@ class JointLayer extends React.Component {
     let pivotX, pivotY, radius;
 
     switch(jointName) {
-      case 'headTop': 
+      case 'headTop':
         pivotX = this.props.joints.headBottom.x;
         pivotY = this.props.joints.headBottom.y;
-        radius = 20; 
+        radius = 20;
         break;
-      case 'headBottom': 
+      case 'headBottom':
         pivotX = this.props.joints.neck.x;
         pivotY = this.props.joints.neck.y;
-        radius = 10; 
+        radius = 10;
         break;
-      case 'neck': 
+      case 'neck':
         pivotX = this.props.joints.pelvis.x;
         pivotY = this.props.joints.pelvis.y;
         radius = 95;
-        break; 
-      case 'shoulderLeft': 
+        break;
+      case 'shoulderLeft':
       case 'shoulderRight':
         pivotX = this.props.joints.neck.x;
         pivotY = this.props.joints.neck.y;
-        radius = 24; 
+        radius = 24;
         break;
       case 'elbowLeft':
         pivotX = this.props.joints.shoulderLeft.x;
         pivotY = this.props.joints.shoulderLeft.y;
-        radius = 62; 
+        radius = 62;
         break;
       case 'elbowRight':
         pivotX = this.props.joints.shoulderRight.x;
         pivotY = this.props.joints.shoulderRight.y;
-        radius = 62; 
+        radius = 62;
         break;
-      case 'handLeft': 
+      case 'handLeft':
         pivotX = this.props.joints.elbowLeft.x;
         pivotY = this.props.joints.elbowLeft.y;
-        radius = 62; 
+        radius = 62;
         break;
       case 'handRight':
         pivotX = this.props.joints.elbowRight.x;
@@ -159,7 +159,7 @@ class JointLayer extends React.Component {
         radius = 67; 
         break;
       default: 
-        console.log('invalid joint from findPivot() in JointLayer.js')
+        // Joint With No Children
         break;
     }
 
