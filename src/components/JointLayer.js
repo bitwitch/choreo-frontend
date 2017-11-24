@@ -29,7 +29,7 @@ class JointLayer extends React.Component {
       ref={name}
       x={x}
       y={y}
-      radius={7}
+      radius={6}
       stroke='#666666'
       fill='#dddddd'
       strokeWidth={2}
