@@ -1,6 +1,6 @@
 import React from 'react'; 
 import { Layer, Circle } from 'react-konva'; 
-import { jointChildren } from '../data/bodyPartsJointsMap';
+import { jointChildren, pivotMap } from '../data/bodyPartsJointsMap';
 
 class JointLayer extends React.Component {
   // shouldComponentUpdate(nextProps, nextState) { // CAN UNCOMMENT AND ADD CONDITIONS TO PREVENT 
@@ -88,91 +88,16 @@ class JointLayer extends React.Component {
   }
 
   findPivot = (jointName) => {
-    let pivotX, pivotY, radius;
-
-    switch(jointName) {
-      case 'headTop':
-        pivotX = this.props.joints.headBottom.x;
-        pivotY = this.props.joints.headBottom.y;
-        radius = 20;
-        break;
-      case 'headBottom':
-        pivotX = this.props.joints.neck.x;
-        pivotY = this.props.joints.neck.y;
-        radius = 10;
-        break;
-      case 'neck':
-        pivotX = this.props.joints.pelvis.x;
-        pivotY = this.props.joints.pelvis.y;
-        radius = 95;
-        break;
-      case 'shoulderLeft':
-      case 'shoulderRight':
-        pivotX = this.props.joints.neck.x;
-        pivotY = this.props.joints.neck.y;
-        radius = 24;
-        break;
-      case 'elbowLeft':
-        pivotX = this.props.joints.shoulderLeft.x;
-        pivotY = this.props.joints.shoulderLeft.y;
-        radius = 62;
-        break;
-      case 'elbowRight':
-        pivotX = this.props.joints.shoulderRight.x;
-        pivotY = this.props.joints.shoulderRight.y;
-        radius = 62;
-        break;
-      case 'handLeft':
-        pivotX = this.props.joints.elbowLeft.x;
-        pivotY = this.props.joints.elbowLeft.y;
-        radius = 62;
-        break;
-      case 'handRight':
-        pivotX = this.props.joints.elbowRight.x;
-        pivotY = this.props.joints.elbowRight.y;
-        radius = 62; 
-        break;
-      case 'hipLeft':
-      case 'hipRight':
-        pivotX = this.props.joints.pelvis.x;
-        pivotY = this.props.joints.pelvis.y;
-        radius = 25; 
-        break;
-      case 'kneeLeft':
-        pivotX = this.props.joints.hipLeft.x;
-        pivotY = this.props.joints.hipLeft.y;
-        radius = 79; 
-        break;
-      case 'kneeRight':
-        pivotX = this.props.joints.hipRight.x;
-        pivotY = this.props.joints.hipRight.y;
-        radius = 79; 
-        break;
-      case 'footLeft':
-        pivotX = this.props.joints.kneeLeft.x;
-        pivotY = this.props.joints.kneeLeft.y;
-        radius = 67; 
-        break;
-      case 'footRight':
-        pivotX = this.props.joints.kneeRight.x;
-        pivotY = this.props.joints.kneeRight.y;
-        radius = 67; 
-        break;
-      default: 
-        // Joint With No Children
-        break;
-    }
+    if (jointName === 'pelvis') return false; 
+    const pivot = pivotMap[jointName].pivot; 
+    const pivotX = this.props.joints[pivot].x;
+    const pivotY = this.props.joints[pivot].y;
+    const radius = pivotMap[jointName].radius; 
 
     return {x: pivotX, y: pivotY, radius: radius}
   }
 
   dragBound = function(pos) {
-     // Find pivot position 
-    // if the distance from the current joint to its pivot is greater than the length of the appendage
-      // dont let the joint move any more
-      // in other words, draw a boundary around the pivot the length of the appendage 
-    // else proceed 
-
     let newX, newY; 
     const pivot = this.attrs.findPivot(this.attrs.name);
     const scale = pivot.radius / Math.sqrt(Math.pow(pos.x - pivot.x, 2) + Math.pow(pos.y - pivot.y, 2));
@@ -183,6 +108,7 @@ class JointLayer extends React.Component {
         x: Math.round((pos.x - pivot.x) * scale + pivot.x)
       }
     } else {
+
       if (pos.x < 5) {
         newX = 5;
       } else if (pos.x > 295) {
@@ -194,7 +120,7 @@ class JointLayer extends React.Component {
       if (pos.y < 5) {
         newY = 5;
       } else if (pos.y > 295) {
-        newY = 295; 
+        newY = 295;
       } else {
         newY = pos.y;
       }

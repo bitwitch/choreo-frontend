@@ -79,3 +79,22 @@ export const jointChildren = {
   footLeft: [],
   footRight: []
 };
+
+export const pivotMap = {
+  headTop: {pivot: 'headBottom', radius: 20},
+  headBottom: {pivot: 'neck', radius: 10},
+  neck: {pivot: 'pelvis', radius: 95},
+  shoulderLeft: {pivot: 'neck', radius: 24},
+  shoulderRight: {pivot: 'neck', radius: 24},
+  elbowLeft: {pivot: 'shoulderLeft', radius: 62},
+  elbowRight: {pivot: 'shoulderRight', radius: 62},
+  handLeft: {pivot: 'elbowLeft', radius: 62},
+  handRight: {pivot: 'elbowRight', radius: 62},
+  hipLeft: {pivot: 'pelvis', radius: 25},
+  hipRight: {pivot: 'pelvis', radius: 25},
+  kneeLeft: {pivot: 'hipLeft', radius: 79},
+  kneeRight: {pivot: 'hipRight', radius: 79},
+  footLeft: {pivot: 'kneeLeft', radius: 67},
+  footRight: {pivot: 'kneeRight', radius: 67}
+}
+
