@@ -1,15 +1,16 @@
 import React from 'react'; 
 import { Stage } from 'react-konva'; 
-import { bindActionCreators } from 'redux'; 
-import { connect } from 'react-redux'; 
 import JointLayer from './JointLayer';
 import LineLayer from './LineLayer'; 
-import moveJoint from '../actions/joints'
+import { bindActionCreators } from 'redux'; 
+import { connect } from 'react-redux'; 
+import { moveJoint } from '../actions/joints';
 
 const Figure = (props) => {
   
   return (
     <Stage width={300} height={300}> 
+      {console.log(props)}
       <LineLayer joints={props.joints} setCurrentPose={props.setCurrentPose} />
       <JointLayer moveJoint={props.moveJoint} joints={props.joints} />
     </Stage>
@@ -29,11 +30,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Figure); 
-
-
-
-
-
-
-
 

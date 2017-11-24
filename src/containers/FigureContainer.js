@@ -1,6 +1,6 @@
 import React from 'react'; 
 import Figure from '../components/Figure'; 
-import moveJoint from '../actions/joints';
+import { moveJoint, reset } from '../actions/joints';
 import { addPose, setCurrentPose } from '../actions/poses';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
@@ -32,6 +32,7 @@ class FigureContainer extends React.Component {
       <div> 
         <Figure joints={this.props.joints} moveJoint={this.props.moveJoint} setCurrentPose={this.props.setCurrentPose} />
         <button onClick={this.onAddPose}>Add Pose</button>
+        <button onClick={this.props.reset}>Reset</button>
       </div> 
     )
   }
@@ -48,7 +49,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     moveJoint: moveJoint,
     addPose: addPose,
-    setCurrentPose: setCurrentPose
+    setCurrentPose: setCurrentPose,
+    reset: reset
   }, dispatch);
 }
 

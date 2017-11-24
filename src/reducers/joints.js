@@ -23,6 +23,8 @@ export default function jointReducer(state=defaultState, action) {
       const {name, x, y} = action.payload;
       const newJoint = { [name]: {x, y} }; 
       return {...state, ...newJoint}; 
+    case 'RESET':
+      return {...defaultState}
     default: 
       return state;
   }
