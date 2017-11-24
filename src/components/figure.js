@@ -10,7 +10,6 @@ const Figure = (props) => {
   
   return (
     <Stage width={300} height={300}> 
-      {console.log(props)}
       <LineLayer joints={props.joints} setCurrentPose={props.setCurrentPose} />
       <JointLayer moveJoint={props.moveJoint} joints={props.joints} />
     </Stage>

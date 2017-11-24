@@ -30,7 +30,7 @@ class FigureContainer extends React.Component {
   render() {
     return (
       <div> 
-        <Figure joints={this.props.joints} moveJoint={this.props.moveJoint} setCurrentPose={this.props.setCurrentPose} />
+        <Figure setCurrentPose={this.props.setCurrentPose} />
         <button onClick={this.onAddPose}>Add Pose</button>
         <button onClick={this.props.reset}>Reset</button>
       </div> 
