@@ -58,7 +58,6 @@ class PlaybackContainer extends React.Component {
 
   render() {
     const currentFrame = this.state.frames[this.state.frameCounter];
-    console.log(currentFrame)
 
     return (
       <div className="playback-container"> 
