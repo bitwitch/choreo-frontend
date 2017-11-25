@@ -5,7 +5,7 @@ import { addPose, setCurrentPose } from '../actions/poses';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import { Line, Ellipse } from 'react-konva'; 
-
+import './FigureContainer.css';
 class FigureContainer extends React.Component {
 
   onAddPose = () => {
@@ -29,7 +29,7 @@ class FigureContainer extends React.Component {
 
   render() {
     return (
-      <div> 
+      <div className='figure-container'> 
         <Figure setCurrentPose={this.props.setCurrentPose} />
         <button onClick={this.onAddPose}>Add Pose</button>
         <button onClick={this.props.reset}>Reset</button>
