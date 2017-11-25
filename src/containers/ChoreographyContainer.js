@@ -3,7 +3,7 @@ import PoseList from '../components/PoseList';
 import { removePose } from '../actions/poses'; 
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux';
-import { saveChoreography } from '../services/choreoBackendApi'; 
+import { saveChoreography } from '../services/choreoApi'; 
 
 class ChoreographyContainer extends React.Component {
 

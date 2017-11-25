@@ -41,6 +41,8 @@ class PlaybackContainer extends React.Component {
   }
 
   handlePlay = () => {
+    if (this.state.frames.length === 0) return false; 
+    
     this.play = setInterval(() => {
       const newFrameCount = this.state.frameCounter === this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
       this.setState({frameCounter: newFrameCount})

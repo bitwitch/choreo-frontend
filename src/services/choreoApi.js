@@ -2,9 +2,13 @@ const baseURL = 'http://localhost:3000/api/v1'
 
 export function login(params) {
   return fetch(`${baseURL}/login`, {
-    method: 'POST', 
-    body: JSON.stringify(params),
-  }).then(res => res.json())
+      method: 'POST',
+      body: JSON.stringify(params),
+      headers: {
+        'Content-Type': 'application/json',
+        Accepts: 'application/json'
+      }
+    }).then(res => res.json()).then(json => console.log(json));
 }
 
 export function saveChoreography(id, choreo) {
@@ -14,8 +18,8 @@ export function saveChoreography(id, choreo) {
     method: 'POST',
     body: JSON.stringify(body),
     headers: {
-      Accepts: 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      Accepts: 'application/json'
     }
     // JWT TOKEN / AUTH INFO 
   }).then(res => res.json())
