@@ -21,7 +21,7 @@ class FigureContainer extends React.Component {
         const newCenterY = line.props.y / 2; 
         return <Ellipse key={++i} x={newCenterX} y={newCenterY} radius={{x: 5, y: 7}} stroke='#000' strokeWidth={3}/>;
       } else {
-        const newPoints = line.props.points.map(point => Math.floor(point/2)); 
+        const newPoints = line.props.points.map(point => point/2); 
         return <Line key={++i} points={newPoints} stroke='#000' strokeWidth={3} />;
       }
     });
