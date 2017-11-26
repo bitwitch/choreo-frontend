@@ -1,5 +1,6 @@
 import React from 'react'; 
-import ModalWrapper from './ModalWrapper';  
+import ModalWrapper from './ModalWrapper'; 
+import '../style/Modal.css' 
 
 class SaveChoreoModal extends React.Component {
 
@@ -10,9 +11,8 @@ class SaveChoreoModal extends React.Component {
 
   render() {
     return (
-      <ModalWrapper title='Save Choreography' width={400} showOk={false} {...props}>
-        <p>Save Choreography</p>
-        <button onClick={this.handleSave}>Save</button>
+      <ModalWrapper title='Save Choreography' width={400} showOk={false} {...this.props}>
+        <button className='modal-button' onClick={this.handleSave}>Save</button>
       </ModalWrapper> 
     )
   }
