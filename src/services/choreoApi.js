@@ -46,6 +46,6 @@ function headers() {
   return {
     'content-type': 'application/json',
     'accept': 'application/json',
-    'Authorization': localStorage.getItem('jwt')
+    'Authorization': `Bearer ${localStorage.getItem('jwt')}`
   }
 }

@@ -2,15 +2,14 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router'; 
 import { AuthAdapter as Auth } from '../services/choreoApi';
-import FigureContainer from '../containers/FigureContainer';
-import ChoreographyContainer from '../containers/ChoreographyContainer';
 import Navbar from './Navbar'; 
-import PlaybackContainer from '../containers/PlaybackContainer'; 
+import CreatorContainer from '../containers/CreatorContainer'; 
 import ProfilePage from '../containers/ProfileContainer';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import { login_user, logout_user } from '../actions/auth'; 
 import LoginForm from './LoginForm'; 
+import authorize from './authorize'; 
 
 class App extends React.Component {
   
@@ -20,6 +19,7 @@ class App extends React.Component {
       if (!user.error){
         this.props.login_user(user) // dispatch action to redux store 
         localStorage.setItem('jwt', user.jwt)
+        this.props.history.push('/choreo')
       }
     })
   }
@@ -34,35 +34,31 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.login({username: 'Jon', password: 'password'})
-    // if (localStorage.getItem('jwt')) {
-    //    Auth.currentUser()
-    //    .then(user => {
-    //      if (!user.error) {
-    //        console.log("fetch user");
-    //        this.props.login_user(user) // dispatch action to redux store
-    //      }
-    //    })
-    //  }
+    if (localStorage.getItem('jwt')) {
+       Auth.currentUser()
+       .then(user => {
+         if (!user.error) {
+           console.log("fetch user");
+           console.log(user)
+           this.props.login_user(user) // dispatch action to redux store
+         }
+       })
+     }
   }
 
   render() {
+    console.log('auth: ', this.props.auth)
+
+    const AuthLoginForm = authorize(LoginForm)
+    const AuthProfilePage = authorize(ProfilePage)
+    const AuthCreatorContainer = authorize(CreatorContainer)
     return (
       <div className='app'>
         <Navbar />
-
         <div className='main'>
-          {this.loggedIn() ? <Redirect to='/choreo' /> : <Redirect to='/login'/>}
-          <Route path='/login' render={() => <LoginForm login={this.login} />} />
-
-          <Route path='/profile' render={props => <ProfilePage props={props} />} /> 
-          <Route path='/choreo' render={props => 
-            <div>
-              <FigureContainer />
-              <PlaybackContainer />
-              <ChoreographyContainer />
-            </div>}>
-          </Route>
+          <Route exact path='/login' render={(props) => <AuthLoginForm login={this.login} {...props}/>} />
+          <Route exact path='/profile' render={props => <AuthProfilePage user={this.props.auth.user} {...props}/>} /> 
+          <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
         </div>
       </div>
     );
