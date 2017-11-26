@@ -9,6 +9,9 @@ export default function poseReducer(state={list: [], currentPose: []}, action) {
     case 'SET_CURRENT_POSE':
       return {...state, currentPose: action.payload}
 
+    case 'RESET_POSES': 
+      return {list: [], currentPose: []}
+
     default: 
       return state; 
   }

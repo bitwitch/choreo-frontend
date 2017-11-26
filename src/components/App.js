@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router'; 
 import { AuthAdapter as Auth } from '../services/choreoApi';
 import Navbar from './Navbar'; 
@@ -19,6 +19,7 @@ class App extends React.Component {
       if (!user.error){
         this.props.login_user(user) // dispatch action to redux store 
         localStorage.setItem('jwt', user.jwt)
+        // localStorage.setItem('user_id', user.info.id)
         this.props.history.push('/choreo')
       }
     })
@@ -33,18 +34,6 @@ class App extends React.Component {
     return !!localStorage.getItem('jwt')
   }
 
-  componentDidMount() {
-    if (localStorage.getItem('jwt')) {
-       Auth.currentUser()
-       .then(user => {
-         if (!user.error) {
-           console.log("fetch user");
-           this.props.login_user(user) // dispatch action to redux store
-         }
-       })
-     }
-  }
-
   render() {
     const AuthLoginForm = authorize(LoginForm)
     const AuthProfileContainer = authorize(ProfileContainer)
@@ -53,8 +42,9 @@ class App extends React.Component {
       <div className='app'>
         <Navbar />
         <div className='main'>
+          <Route exact path='/' render={props => this.loggedIn() ? <Redirect to='/choreo' {...props}/> : <Redirect to='/login' {...props}/> }/>
           <Route exact path='/login' render={(props) => <AuthLoginForm login={this.login} {...props}/>} />
-          <Route exact path='/profile' render={props => <AuthProfileContainer user={this.props.auth.user} {...props}/>} /> 
+          <Route exact path='/profile' render={props => <AuthProfileContainer {...props}/>} /> 
           <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
         </div>
       </div>

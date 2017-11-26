@@ -1,17 +1,19 @@
 import React from 'react'; 
 import PoseList from '../components/PoseList';
-import { removePose } from '../actions/poses'; 
+import { removePose, resetPoses } from '../actions/poses'; 
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux';
 import { saveChoreography } from '../services/choreoApi'; 
 
 class ChoreographyContainer extends React.Component {
-
+  
+  componentWillUnmount() {
+    this.props.resetPoses()
+  }
 
   handleSave = () => {
     // make a post request to the backend 
-    // HARD CODED USER_ID AS ONE CURRENTLY!!!
-    saveChoreography(1, this.props.poses)
+    saveChoreography(localStorage.getItem('user_id'), this.props.poses)
   }
 
   render() {
@@ -32,7 +34,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    removePose: removePose
+    removePose: removePose,
+    resetPoses: resetPoses
   }, dispatch)
 };
 

@@ -15,6 +15,10 @@ export function removePose(poseId) {
   }
 }
 
+export function resetPoses() {
+  return { type: 'RESET_POSES' }
+}
+
 export function setCurrentPose(lines) {
   return {
     type: 'SET_CURRENT_POSE',
