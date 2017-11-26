@@ -1,6 +1,7 @@
 import React from 'react'; 
 import { Stage, Layer } from 'react-konva'; 
 
+
 class Pose extends React.Component {
 
   handleRemovePose = () => {

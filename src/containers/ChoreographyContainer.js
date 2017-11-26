@@ -34,7 +34,7 @@ class ChoreographyContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='choreography-container'>
         <PoseList poses={this.props.poses} removePose={this.props.removePose}/>
         {this.props.poses.length > 0 ? <button onClick={this.showModal}>Save</button> : null }
         {this.state.showModal ? <SaveChoreoModal onSave={this.handleSave} hideModal={this.hideModal}/> : null }

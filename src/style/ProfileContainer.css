@@ -1,4 +1,5 @@
 .profile-container {
+  margin-top: 125px;
   display: flex;
   flex-flow: row wrap; 
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-const {PropTypes} = React;
 
 const ModalWrapper = props => {
   const handleBackgroundClick = e => {

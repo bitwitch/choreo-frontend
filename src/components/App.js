@@ -27,6 +27,7 @@ class App extends React.Component {
 
   logout = () => {
     localStorage.removeItem('jwt')
+    localStorage.removeItem('user_id')
     this.props.logout_user() // dispatch action to redux store 
   }
 
@@ -40,7 +41,7 @@ class App extends React.Component {
     const AuthCreatorContainer = authorize(CreatorContainer)
     return (
       <div className='app'>
-        <Navbar />
+        <Navbar logout={this.logout}/>
         <div className='main'>
           <Route exact path='/' render={props => this.loggedIn() ? <Redirect to='/choreo' {...props}/> : <Redirect to='/login' {...props}/> }/>
           <Route exact path='/login' render={(props) => <AuthLoginForm login={this.login} {...props}/>} />

@@ -1,0 +1,9 @@
+.pose-list {
+  list-style: none; 
+  display: flex;
+  flex-flow: row wrap; 
+}
+
+.pose {
+  width: calc(100% * (1/8) - 12px);
+}
