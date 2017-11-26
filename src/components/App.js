@@ -19,7 +19,7 @@ class App extends React.Component {
       if (!user.error){
         this.props.login_user(user) // dispatch action to redux store 
         localStorage.setItem('jwt', user.jwt)
-        // localStorage.setItem('user_id', user.info.id)
+        localStorage.setItem('user_id', user.info.id)
         this.props.history.push('/choreo')
       }
     })

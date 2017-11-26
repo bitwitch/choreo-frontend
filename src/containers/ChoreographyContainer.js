@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 import { saveChoreography } from '../services/choreoApi'; 
 
 class ChoreographyContainer extends React.Component {
-  
+
   componentWillUnmount() {
     this.props.resetPoses()
   }
 
   handleSave = () => {
-    // make a post request to the backend 
+    // pop up a modal with a form to save the choreography with a name 
     saveChoreography(localStorage.getItem('user_id'), this.props.poses)
   }
 
