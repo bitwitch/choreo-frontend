@@ -6,7 +6,7 @@ class Navbar extends React.Component {
     return (
       <div className='nav'>
         <ul>
-          <li><NavLink to='/choreo'>Home</NavLink></li>
+          <li><NavLink to='/choreo'>Create</NavLink></li>
           <li><NavLink to='/profile'>Profile</NavLink></li>
           <li><NavLink to='/logout'>Logout</NavLink></li>
         </ul> 

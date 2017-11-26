@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux'; 
 import { Line, Ellipse, Stage, Layer } from 'react-konva'; 
-import './PlaybackContainer.css'; 
+import '../style/PlaybackContainer.css'; 
 
 class PlaybackContainer extends React.Component {
   state = {

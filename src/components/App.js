@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router'; 
 import { AuthAdapter as Auth } from '../services/choreoApi';
 import Navbar from './Navbar'; 
 import CreatorContainer from '../containers/CreatorContainer'; 
-import ProfilePage from '../containers/ProfileContainer';
+import ProfileContainer from '../containers/ProfileContainer';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import { login_user, logout_user } from '../actions/auth'; 
@@ -39,7 +39,6 @@ class App extends React.Component {
        .then(user => {
          if (!user.error) {
            console.log("fetch user");
-           console.log(user)
            this.props.login_user(user) // dispatch action to redux store
          }
        })
@@ -47,17 +46,15 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('auth: ', this.props.auth)
-
     const AuthLoginForm = authorize(LoginForm)
-    const AuthProfilePage = authorize(ProfilePage)
+    const AuthProfileContainer = authorize(ProfileContainer)
     const AuthCreatorContainer = authorize(CreatorContainer)
     return (
       <div className='app'>
         <Navbar />
         <div className='main'>
           <Route exact path='/login' render={(props) => <AuthLoginForm login={this.login} {...props}/>} />
-          <Route exact path='/profile' render={props => <AuthProfilePage user={this.props.auth.user} {...props}/>} /> 
+          <Route exact path='/profile' render={props => <AuthProfileContainer user={this.props.auth.user} {...props}/>} /> 
           <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
         </div>
       </div>

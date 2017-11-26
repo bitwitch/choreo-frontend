@@ -1,0 +1,12 @@
+.profile-pic {
+  border: solid 1px #000;
+}
+
+.user-card {
+  width: 300px;
+}
+
+.user-card p {
+  text-align: center; 
+  line-height: .5em; 
+}

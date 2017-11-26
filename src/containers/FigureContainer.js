@@ -5,7 +5,7 @@ import { addPose, setCurrentPose } from '../actions/poses';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import { Line, Ellipse } from 'react-konva'; 
-import './FigureContainer.css';
+import '../style/FigureContainer.css';
 class FigureContainer extends React.Component {
 
   onAddPose = () => {
