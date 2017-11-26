@@ -3,7 +3,7 @@ import React from 'react';
 class FriendsCard extends React.Component {
   render() {
     return (
-      <div>
+      <div className='card-container'>
         Friends
       </div> 
     )

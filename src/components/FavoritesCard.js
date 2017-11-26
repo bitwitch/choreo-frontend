@@ -3,7 +3,7 @@ import React from 'react';
 class FavoritesCard extends React.Component {
   render() {
     return (
-      <div>
+      <div className='card-container'>
         Favs
       </div> 
     )

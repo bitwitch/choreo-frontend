@@ -3,7 +3,7 @@ import React from 'react';
 class ChoreographiesCard extends React.Component {
   render() {
     return (
-      <div>
+      <div className='card-container'>
         Choreographies
       </div> 
     )

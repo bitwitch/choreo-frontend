@@ -1,0 +1,17 @@
+.profile-container {
+  display: flex;
+  flex-flow: row wrap; 
+}
+
+.user-card-container {
+  width: 301px;
+  margin: 50px auto;
+}
+
+.card-container {
+  width: 200px;
+  height: 400px;
+  margin: 0 auto 50px auto;
+  border: solid 1px #000;
+  text-align: center;
+}
