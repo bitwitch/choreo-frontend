@@ -4,14 +4,28 @@ import '../style/Modal.css'
 
 class SaveChoreoModal extends React.Component {
 
+  state = {
+    name: ''
+  }
+
+  handleName = (e) => {
+    this.setState({
+      name: e.target.value
+    })
+  }
+
   handleSave = () => {
+    this.props.onSave(this.state.name)
+    this.setState({
+      name: ''
+    })
     this.props.hideModal()
-    this.props.onSave()
   }
 
   render() {
     return (
       <ModalWrapper title='Save Choreography' width={400} showOk={false} {...this.props}>
+        <input onChange={this.handleName} type='text' placeholder='Name your choreography' value={this.state.name} />
         <button className='modal-button' onClick={this.handleSave}>Save</button>
       </ModalWrapper> 
     )

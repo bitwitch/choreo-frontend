@@ -26,6 +26,11 @@
     margin-top: 0px;
 }
 
+.modal-content input {
+    width: 300px;
+    margin-right: 5px; 
+}
+
 /* The Close Button */
 .close {
     color: #aaa;

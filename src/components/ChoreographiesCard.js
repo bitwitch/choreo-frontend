@@ -3,7 +3,7 @@ import React from 'react';
 class ChoreographiesCard extends React.Component {
   render() {
 
-    const choreographies = this.props.choreographies.map((choreo, i) => <li key={i}>{choreo.name || 'no-name'}</li>)
+    const choreographies = this.props.choreographies.slice(0,15).map((choreo, i) => <li key={i}>{choreo.name || 'no-name'}</li>)
 
     return (
       <div className='card-container'>

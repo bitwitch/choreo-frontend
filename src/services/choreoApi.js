@@ -1,7 +1,7 @@
 const baseURL = 'http://localhost:3000/api/v1'
 
-export function saveChoreography(id, choreo) {
-  const body = {user_id: id, poses_json: JSON.stringify(choreo)};
+export function saveChoreography(user_id, name, choreo) {
+  const body = {user_id: user_id, name: name, poses_json: JSON.stringify(choreo)};
   return fetch(`${baseURL}/choreographies`, {
     method: 'POST',
     body: JSON.stringify(body),

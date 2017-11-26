@@ -16,8 +16,8 @@ class ChoreographyContainer extends React.Component {
     this.props.resetPoses()
   }
 
-  handleSave = () => {
-    saveChoreography(localStorage.getItem('user_id'), this.props.poses)
+  handleSave = (name) => {
+    saveChoreography(localStorage.getItem('user_id'), name, this.props.poses)
   }
 
   showModal = () => {
