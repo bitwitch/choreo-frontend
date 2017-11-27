@@ -1,13 +1,16 @@
 import React from 'react'; 
 import { connect } from 'react-redux'; 
 import { Line, Ellipse, Stage, Layer } from 'react-konva'; 
+import Slider from 'react-rangeslider'; 
+// import 'react-rangeslider/lib/index.css';
 import '../style/PlaybackContainer.css'; 
 
 class PlaybackContainer extends React.Component {
   state = {
     frames: [],
     frameCounter: 0,
-    playing: false
+    playing: false,
+    playbackSpeed: 50
   }
 
   componentWillReceiveProps(nextProps) {
@@ -23,7 +26,7 @@ class PlaybackContainer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.frameCounter !== this.state.frameCounter || nextState.playing !== this.state.playing) return true;
+    if (nextState.frameCounter !== this.state.frameCounter || nextState.playing !== this.state.playing || nextState.playbackSpeed !== this.state.playbackSpeed) return true;
     return nextProps.poses.list.length === this.props.poses.list.length ? false : true;
   }
 
@@ -41,21 +44,31 @@ class PlaybackContainer extends React.Component {
     });
   }
 
+  playbackTimer = () => {
+    if (!this.state.playing) return false;
+
+    const timeInterval = (100 - this.state.playbackSpeed) * 10
+    const newFrameCount = this.state.frameCounter === this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
+    this.setState({frameCounter: newFrameCount})
+    setTimeout(this.playbackTimer, timeInterval)
+  }
+
   handlePlay = () => {
     if (this.state.frames.length === 0 || this.state.playing) return false; 
     
     this.setState({
       playing: true
-    })
+    }, this.playbackTimer)
 
-    this.play = setInterval(() => {
-      const newFrameCount = this.state.frameCounter === this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
-      this.setState({frameCounter: newFrameCount})
-    }, 300)
+    // this.playbackTimer()
+    // this.play = setInterval(() => {
+    //   const timeInterval = this.state.playbackSpeed * 4 
+    //   const newFrameCount = this.state.frameCounter === this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
+    //   this.setState({frameCounter: newFrameCount})
+    // }, timeInterval)
   }
 
   handleStop = () => {
-    clearInterval(this.play);
     this.setState({
       frameCounter: 0,
       playing: false
@@ -63,9 +76,14 @@ class PlaybackContainer extends React.Component {
   }
 
   handlePause = () => {
-    clearInterval(this.play);
     this.setState({
       playing: false
+    })
+  }
+
+  handlePlaybackSpeed = (value) => {
+    this.setState({
+      playbackSpeed: value
     })
   }
 
@@ -85,10 +103,13 @@ class PlaybackContainer extends React.Component {
             {currentFrame}
           </Layer> 
         </Stage>
+
         <div className='button-container'>
           {playPauseButton}
           <button onClick={this.handleStop}><img height={20} width={20} src='https://i.imgur.com/unx98ZO.png' alt='Stop'/></button>
         </div>
+
+        <Slider onChange={this.handlePlaybackSpeed} min={0} max={100} value={this.state.playbackSpeed} tooltip={false} />
       </div> 
     )
   }

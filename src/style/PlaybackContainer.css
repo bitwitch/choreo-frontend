@@ -12,3 +12,53 @@
   margin-bottom: 5px; 
   background-color: #f0f0f0;
 }
+
+.rangeslider-horizontal .rangeslider__fill {
+  height: 100%;
+  background-color: #333;
+  border-radius: 10px;
+  top: 0;
+}
+
+.rangeslider,
+.rangeslider .rangeslider__fill {
+  display: block;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.rangeslider .rangeslider__handle {
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 -1px 3px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 -1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.rangeslider-horizontal .rangeslider__handle {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.rangeslider-horizontal {
+  height: 12px;
+  border-radius: 10px;
+}
+
+.rangeslider {
+  margin: 20px 0;
+  position: relative;
+  background: #e6e6e6;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+.rangeslider *:focus {
+  outline: none;
+}
