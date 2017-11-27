@@ -10,7 +10,7 @@ class PlaybackContainer extends React.Component {
     frames: [],
     frameCounter: 0,
     playing: false,
-    playbackSpeed: 50
+    playbackSpeed: 75
   }
 
   componentWillReceiveProps(nextProps) {
@@ -23,6 +23,10 @@ class PlaybackContainer extends React.Component {
         frames
       });
     }
+  }
+
+  componentWillUnmount(){
+    clearTimeout(this.timeout)
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -45,12 +49,13 @@ class PlaybackContainer extends React.Component {
   }
 
   playbackTimer = () => {
+    console.log('timer: ', this.state.playing, ' timeout: ', this.timeout)
     if (!this.state.playing) return false;
 
     const timeInterval = (100 - this.state.playbackSpeed) * 10
     const newFrameCount = this.state.frameCounter === this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
     this.setState({frameCounter: newFrameCount})
-    setTimeout(this.playbackTimer, timeInterval)
+    this.timeout = setTimeout(this.playbackTimer, timeInterval)
   }
 
   handlePlay = () => {

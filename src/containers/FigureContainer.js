@@ -1,7 +1,7 @@
 import React from 'react'; 
 import Figure from '../components/Figure'; 
 import { moveJoint, reset } from '../actions/joints';
-import { addPose, setCurrentPose } from '../actions/poses';
+import { addPose, setCurrentPose, resetPoses } from '../actions/poses';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import { Line, Ellipse } from 'react-konva'; 
@@ -25,6 +25,10 @@ class FigureContainer extends React.Component {
         return <Line key={++i} points={newPoints} stroke='#000' strokeWidth={3} />;
       }
     });
+  } 
+
+  componentWillMount() {
+    this.props.resetPoses()
   }
 
   render() {
@@ -50,7 +54,8 @@ function mapDispatchToProps(dispatch) {
     moveJoint: moveJoint,
     addPose: addPose,
     setCurrentPose: setCurrentPose,
-    reset: reset
+    reset: reset,
+    resetPoses: resetPoses
   }, dispatch);
 }
 

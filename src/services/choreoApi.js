@@ -9,6 +9,12 @@ export function saveChoreography(user_id, name, choreo) {
   }).then(res => res.json()); 
 }
 
+export function fetchChoreography(id) {
+  return fetch(`${baseURL}/choreographies/${id}`, {
+    headers: headers()
+  }).then(res => res.json())
+}
+
 export class AuthAdapter {
   static login(loginParams) {
     return fetch(`${baseURL}/login`, {

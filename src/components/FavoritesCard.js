@@ -5,7 +5,7 @@ class FavoritesCard extends React.Component {
   render() {
 
     const likes = this.props.likes.slice(0, 15).map((like, i) => {
-     return <li key={i}><NavLink to={`profile/favs/${like.choreography_id}`}>{like}</NavLink></li>
+     return <li key={i}><NavLink to={`profile/favs/${like.choreography_id}`}>Like</NavLink></li>
     })
     return (
       <div className='card-container'>
