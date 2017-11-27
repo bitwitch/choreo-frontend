@@ -16,3 +16,11 @@
   border: solid 1px #000;
   text-align: center;
 }
+
+.card-container ul {
+  padding: 0 1em;
+}
+
+.card-container li {
+  list-style: none;
+}

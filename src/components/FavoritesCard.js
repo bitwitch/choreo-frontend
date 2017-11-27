@@ -1,9 +1,12 @@
 import React from 'react'; 
+import { NavLink } from 'react-router-dom';
 
 class FavoritesCard extends React.Component {
   render() {
 
-    const likes = this.props.likes.slice(0, 15).map((like, i) => <li key={i}>{like}</li>)
+    const likes = this.props.likes.slice(0, 15).map((like, i) => {
+     return <li key={i}><NavLink to={`/choreographies/${like.choreography_id}`}>{like}</NavLink></li>
+    })
     return (
       <div className='card-container'>
         <h4>Favs</h4>

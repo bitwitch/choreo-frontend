@@ -6,7 +6,8 @@ import '../style/PlaybackContainer.css';
 class PlaybackContainer extends React.Component {
   state = {
     frames: [],
-    frameCounter: 0
+    frameCounter: 0,
+    playing: false
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,8 +42,12 @@ class PlaybackContainer extends React.Component {
   }
 
   handlePlay = () => {
-    if (this.state.frames.length === 0) return false; 
+    if (this.state.frames.length === 0 || this.state.playing) return false; 
     
+    this.setState({
+      playing: true
+    })
+
     this.play = setInterval(() => {
       const newFrameCount = this.state.frameCounter === this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
       this.setState({frameCounter: newFrameCount})
@@ -51,11 +56,17 @@ class PlaybackContainer extends React.Component {
 
   handleStop = () => {
     clearInterval(this.play);
-    this.setState({frameCounter: 0})
+    this.setState({
+      frameCounter: 0,
+      playing: false
+    })
   }
 
   handlePause = () => {
     clearInterval(this.play);
+    this.setState({
+      playing: false
+    })
   }
 
   render() {

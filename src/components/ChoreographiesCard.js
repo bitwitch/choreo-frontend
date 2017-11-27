@@ -1,9 +1,12 @@
-import React from 'react'; 
+import React from 'react';
+import { NavLink } from 'react-router-dom'; 
 
 class ChoreographiesCard extends React.Component {
   render() {
 
-    const choreographies = this.props.choreographies.slice(0,15).map((choreo, i) => <li key={i}>{choreo.name || 'no-name'}</li>)
+    const choreographies = this.props.choreographies.slice(0,15).map((choreo, i) => {
+      return <li key={i}><NavLink to={`/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}</NavLink></li>
+    })
 
     return (
       <div className='card-container'>
