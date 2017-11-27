@@ -5,6 +5,8 @@ import { AuthAdapter as Auth } from '../services/choreoApi';
 import Navbar from './Navbar'; 
 import CreatorContainer from '../containers/CreatorContainer'; 
 import ProfileContainer from '../containers/ProfileContainer';
+import Friend from './Friend'; 
+import Choreography from './Choreography'
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import { login_user, logout_user } from '../actions/auth'; 
@@ -36,16 +38,25 @@ class App extends React.Component {
   }
 
   render() {
-    const AuthLoginForm = authorize(LoginForm)
+    const AuthLoginForm        = authorize(LoginForm)
     const AuthProfileContainer = authorize(ProfileContainer)
     const AuthCreatorContainer = authorize(CreatorContainer)
+    const AuthChoreography     = authorize(Choreography)
+    const AuthFriend           = authorize(Friend)
+    
     return (
       <div className='app'>
         <Navbar logout={this.logout}/>
         <div className='main'>
           <Route exact path='/' render={props => this.loggedIn() ? <Redirect to='/choreo' {...props}/> : <Redirect to='/login' {...props}/> }/>
-          <Route exact path='/login' render={(props) => <AuthLoginForm login={this.login} {...props}/>} />
+          <Route exact path='/login' render={props => <AuthLoginForm login={this.login} {...props}/>} />
           <Route exact path='/profile' render={props => <AuthProfileContainer {...props}/>} /> 
+
+          {/* Profile Page Routes*/}
+          <Route exact path='/profile/choreographies/:id' render={props => <AuthChoreography {...props} />}/>
+          <Route exact path='/profile/friends/:id' render={props => <AuthFriend {...props} />}/>
+          <Route exact path='/profile/favs/:id' render={props => <AuthChoreography {...props} />}/>
+
           <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
         </div>
       </div>
