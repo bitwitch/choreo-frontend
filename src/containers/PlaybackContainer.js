@@ -23,7 +23,7 @@ class PlaybackContainer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.frameCounter !== this.state.frameCounter) return true;
+    if (nextState.frameCounter !== this.state.frameCounter || nextState.playing !== this.state.playing) return true;
     return nextProps.poses.list.length === this.props.poses.list.length ? false : true;
   }
 
@@ -71,18 +71,24 @@ class PlaybackContainer extends React.Component {
 
   render() {
     const currentFrame = this.state.frames[this.state.frameCounter];
+    const playPauseButton = this.state.playing ? 
+      <button onClick={this.handlePause}><img height={20} width={20} src='https://i.imgur.com/Qo6uE4L.png' alt='Pause'/></button>
+    :
+      <button onClick={this.handlePlay}><img height={20} width={20} src='https://i.imgur.com/NTz3SDu.png' alt='Play'/></button>
+    ;
 
     return (
-      <div className="playback-container"> 
+      <div className='playback-container'> 
         Count: {this.state.frameCounter + 1}
-        <Stage width={300} height={300}>
+        <Stage className='playback-stage' width={300} height={300}>
           <Layer>
             {currentFrame}
           </Layer> 
         </Stage>
-        <button onClick={this.handlePlay}>Play</button>
-        <button onClick={this.handlePause}>Pause</button>
-        <button onClick={this.handleStop}>Stop</button>
+        <div className='button-container'>
+          {playPauseButton}
+          <button onClick={this.handleStop}><img height={20} width={20} src='https://i.imgur.com/unx98ZO.png' alt='Stop'/></button>
+        </div>
       </div> 
     )
   }
