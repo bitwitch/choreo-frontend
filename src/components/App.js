@@ -10,7 +10,8 @@ import Choreography from './Choreography'
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import { login_user, logout_user } from '../actions/auth'; 
-import LoginForm from './LoginForm'; 
+// import LoginForm from './LoginForm'; 
+import WelcomeContainer from '../containers/WelcomeContainer';
 import authorize from './authorize'; 
 
 class App extends React.Component {
@@ -37,8 +38,13 @@ class App extends React.Component {
     return !!localStorage.getItem('jwt')
   }
 
+  signUp = (signUpParams) => {
+    console.log('in signUp()')
+  }
+
   render() {
-    const AuthLoginForm        = authorize(LoginForm)
+    // const AuthLoginForm        = authorize(LoginForm)
+    const AuthWelcomContainer  = authorize(WelcomeContainer)
     const AuthProfileContainer = authorize(ProfileContainer)
     const AuthCreatorContainer = authorize(CreatorContainer)
     const AuthChoreography     = authorize(Choreography)
@@ -49,7 +55,7 @@ class App extends React.Component {
         <Navbar logout={this.logout}/>
         <div className='main'>
           <Route exact path='/' render={props => this.loggedIn() ? <Redirect to='/choreo' {...props}/> : <Redirect to='/login' {...props}/> }/>
-          <Route exact path='/login' render={props => <AuthLoginForm login={this.login} {...props}/>} />
+          <Route exact path='/login' render={props => <AuthWelcomContainer login={this.login} signUp={this.signUp} {...props}/>} />
           <Route exact path='/profile' render={props => <AuthProfileContainer {...props}/>} /> 
 
           {/* Profile Page Routes*/}

@@ -1,6 +1,6 @@
 import React from 'react'; 
 import ModalWrapper from './ModalWrapper'; 
-import '../style/Modal.css' 
+import '../style/Modal.css';
 
 class SaveChoreoModal extends React.Component {
 
