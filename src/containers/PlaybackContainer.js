@@ -49,11 +49,10 @@ class PlaybackContainer extends React.Component {
   }
 
   playbackTimer = () => {
-    console.log('timer: ', this.state.playing, ' timeout: ', this.timeout)
     if (!this.state.playing) return false;
 
     const timeInterval = (100 - this.state.playbackSpeed) * 10
-    const newFrameCount = this.state.frameCounter === this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
+    const newFrameCount = this.state.frameCounter >= this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
     this.setState({frameCounter: newFrameCount})
     this.timeout = setTimeout(this.playbackTimer, timeInterval)
   }
@@ -64,13 +63,6 @@ class PlaybackContainer extends React.Component {
     this.setState({
       playing: true
     }, this.playbackTimer)
-
-    // this.playbackTimer()
-    // this.play = setInterval(() => {
-    //   const timeInterval = this.state.playbackSpeed * 4 
-    //   const newFrameCount = this.state.frameCounter === this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
-    //   this.setState({frameCounter: newFrameCount})
-    // }, timeInterval)
   }
 
   handleStop = () => {
