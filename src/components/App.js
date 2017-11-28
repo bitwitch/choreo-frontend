@@ -39,7 +39,15 @@ class App extends React.Component {
   }
 
   signUp = (signUpParams) => {
-    console.log('in signUp()')
+    Auth.signUp(signUpParams)
+    .then(user => {
+      if (!user.error){
+        this.props.login_user(user) // dispatch action to redux store 
+        localStorage.setItem('jwt', user.jwt)
+        localStorage.setItem('user_id', user.info.id)
+        this.props.history.push('/choreo')
+      }
+    })
   }
 
   render() {

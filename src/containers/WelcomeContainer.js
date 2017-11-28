@@ -29,7 +29,7 @@ class WelcomeContainer extends React.Component {
     return (
       <div> 
         WelcomeContainer
-
+        
       {/* Each button triggers a modal with respective forms */}
 
         <button modal='loginModal' onClick={this.showLoginModal}>Login</button>
