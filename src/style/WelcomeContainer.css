@@ -1,0 +1,38 @@
+html, body, div#root, div.app, div.main, div.authorize {
+  height: 100%;
+  margin: 0;
+}
+ .welcome-container {height: 100%;
+  min-height: 100%;
+}
+
+html>body .welcome-container {
+  height:auto;
+}
+
+.welcome-container {
+  margin-top: -54px;
+  background: url('https://i.imgur.com/HbxKWv6.png') center center no-repeat scroll;
+}
+
+.buttons {
+  margin-left: 66%;
+  padding-top: 22%;
+}
+  
+.auth-button {
+  padding: 0;
+  margin-right: 20px;
+  height: 4em;
+  width: 8em;
+}
+
+/*.welcome-container {
+  position: fixed;
+  width: 100%;
+  height: calc(100% - 46px);
+  left: 0;
+  top: 46px;
+  z-index: 10;
+  background-image: url('https://i.imgur.com/HbxKWv6.png'); 
+}*/

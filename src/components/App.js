@@ -52,18 +52,18 @@ class App extends React.Component {
 
   render() {
     // const AuthLoginForm        = authorize(LoginForm)
-    const AuthWelcomContainer  = authorize(WelcomeContainer)
-    const AuthProfileContainer = authorize(ProfileContainer)
-    const AuthCreatorContainer = authorize(CreatorContainer)
-    const AuthChoreography     = authorize(Choreography)
-    const AuthFriend           = authorize(Friend)
+    const AuthWelcomeContainer  = authorize(WelcomeContainer)
+    const AuthProfileContainer  = authorize(ProfileContainer)
+    const AuthCreatorContainer  = authorize(CreatorContainer)
+    const AuthChoreography      = authorize(Choreography)
+    const AuthFriend            = authorize(Friend)
     
     return (
       <div className='app'>
         <Navbar logout={this.logout}/>
         <div className='main'>
           <Route exact path='/' render={props => this.loggedIn() ? <Redirect to='/choreo' {...props}/> : <Redirect to='/login' {...props}/> }/>
-          <Route exact path='/login' render={props => <AuthWelcomContainer login={this.login} signUp={this.signUp} {...props}/>} />
+          <Route exact path='/login' render={props => <AuthWelcomeContainer login={this.login} signUp={this.signUp} {...props}/>} />
           <Route exact path='/profile' render={props => <AuthProfileContainer {...props}/>} /> 
 
           {/* Profile Page Routes*/}

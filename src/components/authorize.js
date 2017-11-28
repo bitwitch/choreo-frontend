@@ -16,7 +16,7 @@ function authorize(RenderedComponent) {
         return <Redirect to='/login' />
       } else {
         return (
-          <div>
+          <div className='authorize'>
             <RenderedComponent {...this.props}/>
           </div>
         )

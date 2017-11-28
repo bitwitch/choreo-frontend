@@ -1,6 +1,7 @@
 import React from 'react'; 
 import LoginModal from '../components/LoginModal'; 
 import SignUpModal from '../components/SignUpModal'; 
+import '../style/WelcomeContainer.css'
 
 class WelcomeContainer extends React.Component {
 
@@ -27,13 +28,13 @@ class WelcomeContainer extends React.Component {
 
   render() {
     return (
-      <div> 
-        WelcomeContainer
+      <div className='welcome-container'> 
         
       {/* Each button triggers a modal with respective forms */}
-
-        <button modal='loginModal' onClick={this.showLoginModal}>Login</button>
-        <button modal='signUpModal' onClick={this.showSignUpModal}>Sign Up</button>
+        <div className='buttons'>
+          <button className='auth-button' modal='loginModal' onClick={this.showLoginModal}>Login</button>
+          <button className='auth-button' modal='signUpModal' onClick={this.showSignUpModal}>Sign Up</button>
+        </div>
 
         {this.state.loginModal ? <LoginModal onLogin={this.props.login} hideModal={this.hideLoginModal}/> : null }
         {this.state.signUpModal ? <SignUpModal onSignUp={this.props.signUp} hideModal={this.hideSignUpModal}/> : null }
