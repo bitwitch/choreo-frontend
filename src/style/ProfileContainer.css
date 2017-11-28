@@ -10,6 +10,7 @@
 }
 
 .card-container {
+  position: relative;
   width: 200px;
   height: 400px;
   margin: 0 auto 50px auto;
@@ -23,4 +24,26 @@
 
 .card-container li {
   list-style: none;
+}
+
+.card-footer {
+  background-color: #b0b0b0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+
+.footer-link {
+  text-decoration: none;
+  position: relative;
+  top: 10px;
+}
+
+.footer-link:visited {
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
 }

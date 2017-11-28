@@ -14,6 +14,10 @@ class ChoreographiesCard extends React.Component {
         <ul>
           {choreographies}
         </ul>
+
+        <div className='card-footer'> 
+          <NavLink className='footer-link' to='/choreographies'>SHOW ALL</NavLink> 
+        </div> 
       </div> 
     )
   }

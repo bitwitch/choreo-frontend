@@ -13,6 +13,10 @@ class FriendsCard extends React.Component {
         <ul>
           {friends}
         </ul>
+
+        <div className='card-footer'> 
+          <NavLink className='footer-link' to='/friends'>SHOW ALL</NavLink> 
+        </div> 
       </div> 
     )
   }

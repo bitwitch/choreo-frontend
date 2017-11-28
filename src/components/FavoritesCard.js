@@ -13,6 +13,10 @@ class FavoritesCard extends React.Component {
         <ul>
           {likes}
         </ul>
+
+        <div className='card-footer'> 
+          <NavLink className='footer-link' to='/likes'>SHOW ALL</NavLink> 
+        </div> 
       </div> 
     )
   }
