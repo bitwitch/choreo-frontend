@@ -24,11 +24,6 @@ class LoginModal extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.onLogin(this.state)
-
-    this.setState({
-      username: '',
-      password: '' 
-    })
   }
 
   render() {

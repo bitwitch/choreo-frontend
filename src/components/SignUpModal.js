@@ -30,12 +30,6 @@ class SignUpModal extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.onSignUp(this.state)
-
-    this.setState({
-      username: '',
-      password: '',
-      confirmation: ''
-    })
   }
 
   render() {

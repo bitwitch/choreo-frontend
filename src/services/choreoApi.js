@@ -15,6 +15,12 @@ export function fetchChoreography(id) {
   }).then(res => res.json())
 }
 
+export function fetchFriend(id) {
+  return fetch(`${baseURL}/users/${id}`, {
+    headers: headers() 
+  }).then(res => res.json())
+}
+
 export class AuthAdapter {
   static login(loginParams) {
     return fetch(`${baseURL}/login`, {

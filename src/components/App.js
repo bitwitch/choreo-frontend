@@ -67,9 +67,9 @@ class App extends React.Component {
           <Route exact path='/profile' render={props => <AuthProfileContainer {...props}/>} /> 
 
           {/* Profile Page Routes*/}
-          <Route exact path='/profile/choreographies/:id' render={props => <AuthChoreography {...props} />}/>
-          <Route exact path='/profile/friends/:id' render={props => <AuthFriend {...props} />}/>
-          <Route exact path='/profile/favs/:id' render={props => <AuthChoreography {...props} />}/>
+          <Route exact path='/choreographies/:id' render={props => <AuthChoreography {...props} />}/>
+          <Route exact path='/friends/:id' render={props => <AuthFriend {...props} />}/>
+          <Route exact path='/likes/:id' render={props => <AuthChoreography {...props} />}/>
 
           <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
         </div>

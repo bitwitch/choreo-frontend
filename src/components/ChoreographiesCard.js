@@ -5,7 +5,7 @@ class ChoreographiesCard extends React.Component {
   render() {
 
     const choreographies = this.props.choreographies.slice(0,15).map((choreo, i) => {
-      return <li key={i}><NavLink to={`profile/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}</NavLink></li>
+      return <li key={i}><NavLink to={`/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}</NavLink></li>
     })
 
     return (

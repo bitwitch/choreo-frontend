@@ -16,6 +16,7 @@ class Navbar extends React.Component {
           <li><NavLink to='/choreo'>Choreo</NavLink></li>
           <li><NavLink to='/profile'>Profile</NavLink></li>
           <li><NavLink to='/trending'>Trending</NavLink></li>
+          <li id='title'>Shaker Maker</li>
           <li id='logout'><NavLink onClick={this.handleClick} to='/logout'>Logout</NavLink></li>
         </ul> 
       </div>

@@ -33,11 +33,14 @@ class ProfileContainer extends React.Component {
     const user = this.state.user
 
     return (
-      <div className='profile-container'> 
-        <UserCard info={user.info} />
-        <ChoreographiesCard choreographies={user.choreographies}/>
-        <FriendsCard friends={user.friends}/>
-        <FavoritesCard likes={user.likes}/>
+      <div className='profile-wrapper'> 
+        <div className='profile-container'>
+          <UserCard info={user.info} />
+          <ChoreographiesCard choreographies={user.choreographies}/>
+          <FriendsCard friends={user.friends}/>
+          <FavoritesCard likes={user.likes}/>
+        </div>
+        <button>Edit Profile</button>
       </div>
     )
   }
