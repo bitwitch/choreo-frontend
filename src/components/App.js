@@ -51,13 +51,12 @@ class App extends React.Component {
   }
 
   render() {
-    // const AuthLoginForm        = authorize(LoginForm)
     const AuthWelcomeContainer  = authorize(WelcomeContainer)
     const AuthProfileContainer  = authorize(ProfileContainer)
     const AuthCreatorContainer  = authorize(CreatorContainer)
     const AuthChoreography      = authorize(Choreography)
     const AuthFriend            = authorize(Friend)
-    
+
     return (
       <div className='app'>
         <Navbar logout={this.logout}/>

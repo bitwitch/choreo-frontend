@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'; 
 import { Line, Ellipse, Stage, Layer } from 'react-konva'; 
 import Slider from 'react-rangeslider'; 
-// import 'react-rangeslider/lib/index.css';
+import { bindActionCreators } from 'redux'
+import { resetPoses } from '../actions/poses'; 
 import '../style/PlaybackContainer.css'; 
 
 class PlaybackContainer extends React.Component {
@@ -26,6 +27,7 @@ class PlaybackContainer extends React.Component {
 
   componentWillUnmount(){
     clearTimeout(this.timeout)
+    this.props.resetPoses()
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -117,5 +119,11 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(PlaybackContainer);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    resetPoses: resetPoses
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlaybackContainer);
 
