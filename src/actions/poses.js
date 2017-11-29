@@ -25,3 +25,10 @@ export function setCurrentPose(lines) {
     payload: lines
   }
 }
+
+export function movePose(oldIndex, newIndex) {
+  return {
+    type: 'MOVE_POSE',
+    payload: {oldIndex, newIndex}
+  }
+}

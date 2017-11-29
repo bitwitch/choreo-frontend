@@ -14,7 +14,6 @@ class PlaybackContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.poses.list.length !== this.props.poses.list.length) {
       const frames = nextProps.poses.list.map(pose => {
         return this.resizePose(pose.lines); 
       });
@@ -22,7 +21,7 @@ class PlaybackContainer extends React.Component {
       this.setState({
         frames
       });
-    }
+    
   }
 
   componentWillUnmount(){
@@ -119,3 +118,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(PlaybackContainer);
+

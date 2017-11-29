@@ -1,10 +1,12 @@
 import React from 'react'; 
 import PoseList from '../components/PoseList';
-import { removePose, resetPoses } from '../actions/poses'; 
+import { removePose, resetPoses, movePose } from '../actions/poses'; 
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux';
 import { saveChoreography } from '../services/choreoApi'; 
 import SaveChoreoModal from '../components/SaveChoreoModal';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 class ChoreographyContainer extends React.Component {
 
@@ -35,7 +37,7 @@ class ChoreographyContainer extends React.Component {
   render() {
     return (
       <div className='choreography-container'>
-        <PoseList poses={this.props.poses} removePose={this.props.removePose}/>
+        <PoseList poses={this.props.poses} removePose={this.props.removePose} movePose={this.props.movePose}/>
         {this.props.poses.length > 0 ? <button onClick={this.showModal}>Save</button> : null }
         {this.state.showModal ? <SaveChoreoModal onSave={this.handleSave} hideModal={this.hideModal}/> : null }
      </div>
@@ -52,8 +54,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     removePose: removePose,
+    movePose: movePose,
     resetPoses: resetPoses
   }, dispatch)
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChoreographyContainer);
+export default DragDropContext(HTML5Backend)(connect(mapStateToProps, mapDispatchToProps)(ChoreographyContainer));

@@ -1,12 +1,12 @@
 import React from 'react'; 
-import Pose from './Pose'; 
-import '../style/PoseList.css'
+import Pose from './Pose';
+import '../style/PoseList.css';
 
 class PoseList extends React.Component {
 
   renderPoses = () => {
     return this.props.poses.map((pose, i) => (
-      <li className='pose' key={i}><Pose pose={pose} removePose={this.props.removePose}/></li> 
+      <li className='pose' key={i}><Pose index={i} pose={pose} removePose={this.props.removePose} movePose={this.props.movePose}/></li> 
     ));
   }
 
