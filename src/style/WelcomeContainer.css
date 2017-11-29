@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Mallanna');
+
 html, body, div#root, div.app, div.main, div.authorize {
   height: 100%;
   margin: 0;
@@ -21,15 +23,15 @@ html>body .welcome-container {
 }
   
 .auth-button {
+  font-family: 'Mallanna', sans-serif;
+  font-size: 1.5em;
   padding: 0;
   margin-right: 20px;
-  height: 4em;
-  width: 8em;
+  height: 2em;
+  width: 4em;
   background-color: rgba(228, 228, 228, 0);
-/*  border: 2px solid #777;*/
   border: none;
   box-shadow: 1px 1px #666a5c;
-/*  border-radius: 5px;*/
 }
 
 .auth-button:hover {
@@ -39,13 +41,10 @@ html>body .welcome-container {
 .auth-button:focus {
   background-color: #666a5c;
   outline: none;
-  -ms-transform: translate(2px 2px);
-  -webkit-transform: translate(2px 2px);
+  -ms-transform: translate(3px 3px);
+  -webkit-transform: translate(3px 3px);
   transform: translate(3px, 3px);
 }
-
-
-
 
 /*.welcome-container {
   position: fixed;
