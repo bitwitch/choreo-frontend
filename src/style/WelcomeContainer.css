@@ -14,7 +14,9 @@ html>body .welcome-container {
 
 .welcome-container {
   margin-top: -54px;
-  background: url('https://i.imgur.com/HbxKWv6.png') center center no-repeat scroll;
+  background: url('https://i.imgur.com/HbxKWv6.png');
+  background-size: cover;
+  background-position: 0px 46px;
 }
 
 .buttons {
