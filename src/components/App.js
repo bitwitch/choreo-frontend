@@ -17,7 +17,6 @@ import WelcomeContainer from '../containers/WelcomeContainer';
 import authorize from './authorize'; 
 
 class App extends React.Component {
-  
   login = (loginParams) => {
     Auth.login(loginParams)
     .then(user => {
@@ -52,6 +51,14 @@ class App extends React.Component {
     })
   }
 
+  componentDidMount() {
+    Auth.currentUser().then(user => {
+      if (!user.error) {
+        this.props.login_user(user)
+      }
+    })
+  }
+
   render() {
     const AuthWelcomeContainer  = authorize(WelcomeContainer)
     const AuthProfileContainer  = authorize(ProfileContainer)
@@ -68,16 +75,16 @@ class App extends React.Component {
         <div className='main'>
           <Route exact path='/' render={props => this.loggedIn() ? <Redirect to='/choreo' {...props}/> : <Redirect to='/login' {...props}/> }/>
           <Route exact path='/login' render={props => <AuthWelcomeContainer login={this.login} signUp={this.signUp} {...props}/>} />
-          <Route exact path='/profile' render={props => <AuthProfileContainer {...props}/>} /> 
+          <Route exact path='/profile' render={props => <AuthProfileContainer user={this.props.auth.user} {...props}/>} /> 
           <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
 
           {/* Profile Page Routes*/}
           <Route exact path='/choreographies/:id' render={props => <AuthChoreography {...props} />}/>
           <Route exact path='/friends/:id' render={props => <AuthFriend {...props} />}/>
           <Route exact path='/likes/:id' render={props => <AuthChoreography {...props} />}/>
-          <Route exact path='/choreographies' render={props => <AuthAllChoreographies {...props} />} /> 
-          <Route exact path='/friends' render={props => <AuthAllFriends {...props} />} /> 
-          <Route exact path='/likes' render={props => <AuthAllLikes {...props} />} /> 
+          <Route exact path='/choreographies' render={props => <AuthAllChoreographies choreographies={this.props.auth.user.choreographies} {...props} />} /> 
+          <Route exact path='/friends' render={props => <AuthAllFriends friends={this.props.auth.user.friends} {...props} />} /> 
+          <Route exact path='/likes' render={props => <AuthAllLikes likes={this.props.auth.user.likes} {...props} />} /> 
 
         </div>
       </div>

@@ -1,9 +1,11 @@
 import React from 'react'; 
+import { NavLink } from 'react-router-dom'; 
 import { connect } from 'react-redux'; 
 import { bindActionCreators } from 'redux'; 
 import { addPose, resetPoses } from '../actions/poses'; 
 import { fetchChoreography } from '../services/choreoApi'; 
 import PlaybackContainer from '../containers/PlaybackContainer';
+import '../style/Choreography.css'
 
 class Choreography extends React.Component {
   state = {
@@ -26,6 +28,7 @@ class Choreography extends React.Component {
       <div>
         Choreography: {this.state.name}
         <PlaybackContainer />
+        <NavLink className='back' to='/choreographies'>Back To All</NavLink> 
       </div>
     )
   }

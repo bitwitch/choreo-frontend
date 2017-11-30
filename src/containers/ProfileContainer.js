@@ -7,30 +7,9 @@ import '../style/ProfileContainer.css';
 import { AuthAdapter as Auth } from '../services/choreoApi';
 
 class ProfileContainer extends React.Component {
-  state = {
-    user: {
-      info: {
-        photo: {url: null},
-        name: null,
-        age: null, 
-        location: null
-      },
-      friends: [],
-      likes: [], 
-      choreographies: []
-    }
-  } 
-
-  componentDidMount() {
-    Auth.currentUser().then(user => 
-      this.setState({
-        user
-      })
-    )
-  }
 
   render() {
-    const user = this.state.user
+    const user = this.props.user 
 
     return (
       <div className='profile-wrapper'> 

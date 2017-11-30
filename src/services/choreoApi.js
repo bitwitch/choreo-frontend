@@ -1,12 +1,18 @@
 const baseURL = 'http://localhost:3000/api/v1'
 
+export function spotifyRedirect() {
+  fetch(`${baseURL}/auth/spotify`, {
+    headers: headers()
+  })
+}
+
 export function saveChoreography(user_id, name, choreo) {
   const body = {user_id: user_id, name: name, poses_json: JSON.stringify(choreo)};
   return fetch(`${baseURL}/choreographies`, {
     method: 'POST',
     body: JSON.stringify(body),
     headers: headers()
-  }).then(res => res.json()); 
+  }).then(res => res.json())
 }
 
 export function fetchChoreography(id) {
