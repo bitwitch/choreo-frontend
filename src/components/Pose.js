@@ -1,5 +1,5 @@
 import React from 'react'; 
-import { Stage, Layer } from 'react-konva';
+import { Stage, Layer, Text } from 'react-konva';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom'; 
 import { DragSource, DropTarget } from 'react-dnd';
@@ -7,10 +7,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 const poseSource = {
   beginDrag(props) {
     return {
-      index: props.index,
-      pose: props.pose, 
-      removePose: props.removePose,
-      movePose: props.movePose
+      index: props.index
     }
   }
 }
@@ -44,7 +41,6 @@ const poseTarget = {
     if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
       return
     }
-
     // Dragging left
     if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
       return
@@ -74,7 +70,6 @@ function targetCollect(connect) {
   }
 }
 
-
 class Pose extends React.Component {
 
   handleRemovePose = () => {
@@ -85,13 +80,22 @@ class Pose extends React.Component {
     const { connectDragSource, connectDropTarget, isDragging, pose } = this.props;
     return connectDropTarget(
       connectDragSource(
-        <div style={{ opacity: isDragging ? 0.5 : 1 }}>
+        <div className='pose' style={{ opacity: isDragging ? 0.5 : 1 }}>
           <Stage width={150} height={150}> 
             <Layer>
               {pose.lines}
+              <Text 
+                text='X'
+                fill='red'
+                fontSize={18}
+                x={130}
+                y={5}
+                onClick={this.handleRemovePose}
+              />
             </Layer>
           </Stage>
-          <button onClick={this.handleRemovePose}>Delete</button> 
+
+          <div className='move-wrapper'><p className='move'>⟸&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;⟹</p></div>
         </div>
       )
     )
