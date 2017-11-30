@@ -10,7 +10,9 @@ import Choreography from './Choreography'
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import { login_user, logout_user } from '../actions/auth'; 
-// import LoginForm from './LoginForm'; 
+import AllChoreographies from './AllChoreographies'; 
+import AllFriends from './AllFriends'; 
+import AllLikes from './AllLikes';
 import WelcomeContainer from '../containers/WelcomeContainer';
 import authorize from './authorize'; 
 
@@ -56,6 +58,9 @@ class App extends React.Component {
     const AuthCreatorContainer  = authorize(CreatorContainer)
     const AuthChoreography      = authorize(Choreography)
     const AuthFriend            = authorize(Friend)
+    const AuthAllChoreographies = authorize(AllChoreographies)
+    const AuthAllFriends        = authorize(AllFriends) 
+    const AuthAllLikes          = authorize(AllLikes)  
 
     return (
       <div className='app'>
@@ -64,13 +69,16 @@ class App extends React.Component {
           <Route exact path='/' render={props => this.loggedIn() ? <Redirect to='/choreo' {...props}/> : <Redirect to='/login' {...props}/> }/>
           <Route exact path='/login' render={props => <AuthWelcomeContainer login={this.login} signUp={this.signUp} {...props}/>} />
           <Route exact path='/profile' render={props => <AuthProfileContainer {...props}/>} /> 
+          <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
 
           {/* Profile Page Routes*/}
           <Route exact path='/choreographies/:id' render={props => <AuthChoreography {...props} />}/>
           <Route exact path='/friends/:id' render={props => <AuthFriend {...props} />}/>
           <Route exact path='/likes/:id' render={props => <AuthChoreography {...props} />}/>
+          <Route exact path='/choreographies' render={props => <AuthAllChoreographies {...props} />} /> 
+          <Route exact path='/friends' render={props => <AuthAllFriends {...props} />} /> 
+          <Route exact path='/likes' render={props => <AuthAllLikes {...props} />} /> 
 
-          <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
         </div>
       </div>
     );

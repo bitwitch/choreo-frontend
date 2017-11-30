@@ -1,21 +1,49 @@
 .playback-container {
-  width: 300px;
-  margin-left: 200px;
+  width: 380px;
+  height: 440px;
+  padding-left: 200px;
+  padding-top: 40px;
+  background: url('https://i.imgur.com/TVKWaHT.png'); 
+  background-repeat: no-repeat;
+  background-size: 360px 417px;
+  background-position: 172px 18px; 
 }
 
 .button-container {
   text-align: center;
+  margin-left: -80px;
+  padding-top: 3px;
+  margin-bottom: -3px;
+}
+
+.button-container button {
+  background-color: #fff; 
+  margin-left: 5px;
+  border-radius: 0;
+}
+
+.button-container button:hover {
+  cursor: pointer;
+  background-color: #d6dbd9;
+  border-radius: 0;
+}
+
+.button-container button:focus {
+  outline: none;
+  border-radius: 0;
 }
 
 .playback-stage {
   border: 2px solid #000;
   margin-bottom: 5px; 
   background-color: #f0f0f0;
+  width: 300px; 
+  height: 300px;
 }
 
 .rangeslider-horizontal .rangeslider__fill {
   height: 100%;
-  background-color: #333;
+  background-color: #7cd275;
   border-radius: 10px;
   top: 0;
 }
@@ -37,6 +65,10 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 -1px 3px rgba(0, 0, 0, 0.4);
 }
 
+.rangeslider__handle:hover {
+  cursor: pointer;
+}
+
 .rangeslider-horizontal .rangeslider__handle {
   width: 15px;
   height: 15px;
@@ -52,7 +84,8 @@
 }
 
 .rangeslider {
-  margin: 20px 0;
+  margin: 15px 10px;
+  width: 280px;
   position: relative;
   background: #e6e6e6;
   -ms-touch-action: none;
