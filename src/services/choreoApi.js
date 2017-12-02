@@ -1,9 +1,9 @@
 const baseURL = 'http://localhost:3000/api/v1'
 
-export function spotifyRedirect() {
-  fetch(`${baseURL}/auth/spotify`, {
+export function waitForSpotify() {
+  return fetch(`${baseURL}/spotify/pending`, {
     headers: headers()
-  })
+  }).then(res => res.json())
 }
 
 export function saveChoreography(user_id, name, choreo) {

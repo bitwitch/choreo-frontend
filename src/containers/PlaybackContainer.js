@@ -15,14 +15,17 @@ class PlaybackContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      const frames = nextProps.poses.list.map(pose => {
-        return this.resizePose(pose.lines); 
-      });
+    const frames = nextProps.poses.list.map(pose => {
+      return this.resizePose(pose.lines); 
+    })
 
-      this.setState({
-        frames
-      });
-    
+    this.setState({
+      frames
+    })
+
+    if (nextProps.playbackSpeed !== this.state.playbackSpeed) {
+      this.setState({playbackSpeed: nextProps.playbackSpeed})
+    }
   }
 
   componentWillUnmount(){

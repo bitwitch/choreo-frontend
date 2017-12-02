@@ -12,4 +12,10 @@ export function logout_user() {
   }
 }
 
+export function setAccessTokens(access, refresh) {
+  return {
+    type: 'SET_ACCESS_TOKENS',
+    payload: {access, refresh}
+  }
+}
 

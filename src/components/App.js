@@ -15,6 +15,7 @@ import AllFriends from './AllFriends';
 import AllLikes from './AllLikes';
 import WelcomeContainer from '../containers/WelcomeContainer';
 import authorize from './authorize'; 
+import SpotifyWebApi from 'spotify-web-api-js';
 
 class App extends React.Component {
   login = (loginParams) => {
@@ -71,7 +72,7 @@ class App extends React.Component {
 
     return (
       <div className='app'>
-        <Navbar logout={this.logout}/>
+        <Navbar logout={this.logout} auth={this.props.auth}/>
         <div className='main'>
           <Route exact path='/' render={props => this.loggedIn() ? <Redirect to='/choreo' {...props}/> : <Redirect to='/login' {...props}/> }/>
           <Route exact path='/login' render={props => <AuthWelcomeContainer login={this.login} signUp={this.signUp} {...props}/>} />
