@@ -17,7 +17,7 @@ class CreatorContainer extends React.Component {
     showModal: false,
     currentSong: {id: '', title: '', tempo: null},
     playbackSpeed: 75,
-    passingSwitch: false 
+    switch: false 
   }
 
   handleSongTitle = (e) => {
@@ -42,9 +42,11 @@ class CreatorContainer extends React.Component {
   }
 
   spotifySearch = () => {
-    fetchSpotifySearch(this.state.songTitle, this.props.tokens.access)
-      .then(json => this.setState({songs: json.tracks.items}, this.showModal))
-    this.setState({songTitle: ''})
+    if (this.state.songTitle) {
+      fetchSpotifySearch(this.state.songTitle, this.props.tokens.access)
+        .then(json => this.setState({songs: json.tracks.items}, this.showModal))
+      this.setState({songTitle: ''})
+    }
   }
 
   showModal = () => {
@@ -73,7 +75,7 @@ class CreatorContainer extends React.Component {
     const {tempo} = this.state.currentSong
     const timeInterval =  1 / (tempo / 60000)
     const playbackSpeed = Math.round( 100 - (timeInterval / 10) )
-    this.setState({passingSwitch: !this.state.passingSwitch}, () => 
+    this.setState({switch: !this.state.switch}, () => 
       this.setState({
         playbackSpeed
       }))
@@ -113,7 +115,7 @@ class CreatorContainer extends React.Component {
 
         <div className='creator-top'>
           <FigureContainer />
-          <PlaybackContainer passingSwitch={this.state.passingSwitch} playbackSpeed={this.state.playbackSpeed}/>
+          <PlaybackContainer switch={this.state.switch} playbackSpeed={this.state.playbackSpeed}/>
         </div>
         <ChoreographyContainer />
       </div> 
