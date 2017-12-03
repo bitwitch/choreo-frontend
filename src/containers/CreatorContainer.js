@@ -16,7 +16,8 @@ class CreatorContainer extends React.Component {
     songs: [],
     showModal: false,
     currentSong: {id: '', title: '', tempo: null},
-    playbackSpeed: 75
+    playbackSpeed: 75,
+    passingSwitch: false 
   }
 
   handleSongTitle = (e) => {
@@ -72,9 +73,14 @@ class CreatorContainer extends React.Component {
     const {tempo} = this.state.currentSong
     const timeInterval =  1 / (tempo / 60000)
     const playbackSpeed = Math.round( 100 - (timeInterval / 10) )
-    this.setState({
-      playbackSpeed
-    })
+    this.setState({passingSwitch: !this.state.passingSwitch}, () => 
+      this.setState({
+        playbackSpeed
+      }))
+  }
+
+  resetPlaybackSpeed = () => {
+    this.setState({playbackSpeed: 75})
   }
 
   render() {
@@ -107,7 +113,7 @@ class CreatorContainer extends React.Component {
 
         <div className='creator-top'>
           <FigureContainer />
-          <PlaybackContainer playbackSpeed={this.state.playbackSpeed}/>
+          <PlaybackContainer passingSwitch={this.state.passingSwitch} playbackSpeed={this.state.playbackSpeed}/>
         </div>
         <ChoreographyContainer />
       </div> 

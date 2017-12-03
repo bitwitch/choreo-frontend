@@ -98,7 +98,6 @@ class PlaybackContainer extends React.Component {
 
     return (
       <div className='playback-container'> 
-        Count: {this.state.frameCounter + 1}
         <Stage className='playback-stage' width={300} height={300}>
           <Layer>
             {currentFrame}
