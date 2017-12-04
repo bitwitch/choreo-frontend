@@ -20,7 +20,7 @@ class SearchResultsModal extends React.Component {
       return (
         <div key={i} className='tracks'>
           <p>{artists} - </p><h4>{song.name}</h4>
-          <button onClick={this.getSong} songid={song.id} songtitle={song.name}>Get Song</button>
+          <button onClick={this.getSong} songid={song.id} songtitle={song.name}>Play Song</button>
         </div>
       )
     })

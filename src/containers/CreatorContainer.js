@@ -3,7 +3,7 @@ import FigureContainer from './FigureContainer'
 import PlaybackContainer from './PlaybackContainer'
 import ChoreographyContainer from './ChoreographyContainer'
 import SearchResultsModal from '../components/SearchResultsModal'
-import { waitForSpotify } from '../services/choreoApi'
+import { waitForSpotify, refreshToken } from '../services/choreoApi'
 import { fetchSpotifySearch, playSong } from '../services/spotifyApi'
 import { setAccessTokens } from '../actions/auth'
 import { bindActionCreators } from 'redux'
@@ -42,7 +42,6 @@ class CreatorContainer extends React.Component {
         clearInterval(this.interval)
         this.props.setAccessTokens(json.access_token, json.refresh_token) // dispatch action to redux store
         console.log('spotify tokens received')
-        console.log(json.access_token, ' ', json.refresh_token)
       }
     }) 
   }
@@ -50,13 +49,23 @@ class CreatorContainer extends React.Component {
   spotifySearch = () => {
     if (this.state.songTitle) {
       fetchSpotifySearch(this.state.songTitle, this.props.tokens.access)
-        .then(json => this.setState({songs: json.tracks.items}, this.showModal))
-      this.setState({songTitle: ''})
+      .then(json => {
+        if (json.tracks) {
+          this.setState({songs: json.tracks.items, songTitle: ''}, this.showModal)
+        } else {
+          refreshToken(this.props.tokens.refresh).then(json => {
+            if (json.access_token) {
+              this.props.setAccessTokens(json.access_token, this.props.tokens.refresh)
+            }
+          })
+
+          this.setState({songTitle: 'Error: Try Again'})
+        }
+      })
     }
   }
 
   showModal = () => {
-    console.log(this.state.songs)
     this.setState({
       showModal: true
     })
@@ -133,7 +142,7 @@ class CreatorContainer extends React.Component {
     // Connect to the player!
     player.connect()
 
-    this.setState({player}, () => console.log(this.state.player))
+    this.setState({player})
   }
 
   render() {

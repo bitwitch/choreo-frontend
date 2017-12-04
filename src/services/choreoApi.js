@@ -1,5 +1,11 @@
 const baseURL = 'http://localhost:3000/api/v1'
 
+export function refreshToken(refresh) {
+  return fetch (`${baseURL}/spotify/refresh?refresh_token=${refresh}`, {
+    headers: headers()
+  }).then(res => res.json())
+}
+
 export function waitForSpotify() {
   return fetch(`${baseURL}/spotify/pending`, {
     headers: headers()
