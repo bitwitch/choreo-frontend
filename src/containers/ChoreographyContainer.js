@@ -7,10 +7,8 @@ import { saveChoreography } from '../services/choreoApi'
 import SaveChoreoModal from '../components/SaveChoreoModal'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-// import { waitForSpotify } from '../services/choreoApi'
 
 class ChoreographyContainer extends React.Component {
-
   state = {
     showModal: false
   }

@@ -4,7 +4,6 @@ import ChoreographiesCard from '../components/ChoreographiesCard';
 import FriendsCard from '../components/FriendsCard'; 
 import FavoritesCard from '../components/FavoritesCard'; 
 import '../style/ProfileContainer.css'; 
-import { AuthAdapter as Auth } from '../services/choreoApi';
 
 class ProfileContainer extends React.Component {
 

@@ -15,7 +15,6 @@ import AllFriends from './AllFriends';
 import AllLikes from './AllLikes';
 import WelcomeContainer from '../containers/WelcomeContainer';
 import authorize from './authorize'; 
-import SpotifyWebApi from 'spotify-web-api-js';
 
 class App extends React.Component {
   login = (loginParams) => {

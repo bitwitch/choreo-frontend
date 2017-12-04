@@ -28,6 +28,9 @@ class CreatorContainer extends React.Component {
 
   createInterval = () => {
     this.interval = setInterval(this.spotifyWait, 3000)
+    setTimeout(() => {
+      if (this.interval) clearInterval(this.interval)
+    }, 300000)
   }
 
   spotifyWait = () => {
@@ -37,6 +40,7 @@ class CreatorContainer extends React.Component {
         clearInterval(this.interval)
         this.props.setAccessTokens(json.access_token, json.refresh_token) // dispatch action to redux store
         console.log('spotify tokens received')
+        console.log(json.access_token, ' ', json.refresh_token)
       }
     }) 
   }
