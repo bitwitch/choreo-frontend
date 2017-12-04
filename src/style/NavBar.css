@@ -46,6 +46,10 @@
     background-color: #111;
 }
 
+#player {
+    float: right;
+}
+
 #logout {
     float: right;
 }

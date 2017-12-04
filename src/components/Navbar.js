@@ -18,6 +18,14 @@ class Navbar extends React.Component {
           <li><NavLink to='/trending'>Trending</NavLink></li>
           <li id='title'>Shaker Maker</li>
           <li id='logout'><NavLink onClick={this.handleClick} to='/logout'>Logout</NavLink></li>
+
+          <li id='player'>
+            <div>
+              <button>Play</button>
+              <button>Stop</button>
+            </div>
+          </li>
+
         </ul> 
       </div>
     )

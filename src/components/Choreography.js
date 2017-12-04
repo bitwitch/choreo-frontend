@@ -27,7 +27,7 @@ class Choreography extends React.Component {
     return (
       <div>
         Choreography: {this.state.name}
-        <PlaybackContainer />
+        <PlaybackContainer playbackSpeed={75}/>
         <NavLink className='back' to='/choreographies'>Back To All</NavLink> 
       </div>
     )

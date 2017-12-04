@@ -6,6 +6,7 @@ import SearchResultsModal from '../components/SearchResultsModal'
 import { waitForSpotify, refreshToken } from '../services/choreoApi'
 import { fetchSpotifySearch, playSong } from '../services/spotifyApi'
 import { setAccessTokens } from '../actions/auth'
+import { addPlayer } from '../actions/player'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Script from 'react-load-script' 
@@ -87,7 +88,7 @@ class CreatorContainer extends React.Component {
     })
 
     const currentTrack = this.state.songs.find(song => song.id === id)
-    playSong(this.state.player._options.id, currentTrack.uri, this.props.tokens.access)
+    playSong(this.props.player._options.id, currentTrack.uri, this.props.tokens.access)
   }
 
   matchBPM = () => {
@@ -142,7 +143,8 @@ class CreatorContainer extends React.Component {
     // Connect to the player!
     player.connect()
 
-    this.setState({player})
+    // this.setState({player})
+    this.props.addPlayer(player)
   }
 
   render() {
@@ -160,7 +162,7 @@ class CreatorContainer extends React.Component {
               <input onClick={this.spotifySearch} type='submit' value='Search'/>
               {this.state.showModal ? <SearchResultsModal songs={this.state.songs} tokens={this.props.tokens} setCurrentSong={this.setCurrentSong} hideModal={this.hideModal}/> : null }
               
-              {/*  Load in Playback SDK  */}
+              {/*  Load in Web Playback SDK script */}
               <Script url="https://sdk.scdn.co/spotify-player.js" onError={this.handleScriptError} onLoad={this.handleScriptLoad}/>
 
             </div>
@@ -189,13 +191,15 @@ class CreatorContainer extends React.Component {
 
 function mapStateToProps(state) {
   return { 
-    tokens: state.auth.tokens
+    tokens: state.auth.tokens,
+    player: state.player 
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setAccessTokens
+    setAccessTokens,
+    addPlayer
   }, dispatch)
 }
 

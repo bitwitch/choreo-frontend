@@ -7,8 +7,6 @@ class AllFriends extends React.Component {
       return <li key={i}><NavLink to={`/friends/${friend.id}`}>{friend.name || 'no-name'}</NavLink></li>
     })
 
-    console.log(this.props.friends)
-
     return (
       <div className='all-friends'>
         <h4>Friends</h4>

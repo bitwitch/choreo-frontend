@@ -7,8 +7,6 @@ class AllChoreographies extends React.Component {
       return <li key={i}><NavLink to={`/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}</NavLink></li>
     })
 
-    console.log(this.props.choreographies)
-
     return (
       <div className='all-choreographies'>
         <h4>Choreographies</h4>
