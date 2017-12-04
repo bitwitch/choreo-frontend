@@ -50,6 +50,28 @@
     float: right;
 }
 
+#player div {
+    margin-top: 9%;
+    width: 90px;
+}
+
+#player button {
+    background-color: #fff; 
+    margin-left: 5px;
+    border-radius: 20px;
+}
+
+#player button:hover {
+  cursor: pointer;
+  background-color: #adadad;
+  border-color: #adadad;
+}
+
+#player button:focus {
+  outline: none;
+  border-color: #adadad;
+}
+
 #logout {
     float: right;
 }
