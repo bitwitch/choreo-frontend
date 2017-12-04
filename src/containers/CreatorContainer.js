@@ -4,10 +4,11 @@ import PlaybackContainer from './PlaybackContainer'
 import ChoreographyContainer from './ChoreographyContainer'
 import SearchResultsModal from '../components/SearchResultsModal'
 import { waitForSpotify } from '../services/choreoApi'
-import { fetchSpotifySearch } from '../services/spotifyApi'
+import { fetchSpotifySearch, playSong } from '../services/spotifyApi'
 import { setAccessTokens } from '../actions/auth'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import Script from 'react-load-script' 
 import '../style/CreatorContainer.css'
 
 class CreatorContainer extends React.Component {
@@ -17,7 +18,8 @@ class CreatorContainer extends React.Component {
     showModal: false,
     currentSong: {id: '', title: '', tempo: null},
     playbackSpeed: 75,
-    switch: false 
+    switch: false,
+    player: null
   }
 
   handleSongTitle = (e) => {
@@ -54,6 +56,7 @@ class CreatorContainer extends React.Component {
   }
 
   showModal = () => {
+    console.log(this.state.songs)
     this.setState({
       showModal: true
     })
@@ -73,6 +76,9 @@ class CreatorContainer extends React.Component {
         tempo
       }
     })
+
+    const currentTrack = this.state.songs.find(song => song.id === id)
+    playSong(this.state.player._options.id, currentTrack.uri, this.props.tokens.access)
   }
 
   matchBPM = () => {
@@ -89,10 +95,51 @@ class CreatorContainer extends React.Component {
     this.setState({playbackSpeed: 75})
   }
 
+  handleScriptError = () => {
+    console.log("Error loading Spotify Playback SDK")
+  }
+
+  handleScriptLoad = () => {
+    const token = this.props.tokens.access
+    const player = new window.Spotify.Player({
+      name: 'Shaker Maker Player',
+      getOAuthToken: cb => { cb(token) }
+    })
+
+    // Error handling
+    player.on('initialization_error', e => console.error(e))
+    player.on('authentication_error', e => console.error(e))
+    player.on('account_error', e => console.error(e))
+    player.on('playback_error', e => console.error(e))
+
+    // Playback status updates
+    player.on('player_state_changed', state => console.log('player state: ', state))
+
+    // Ready
+    player.on('ready', data => {
+      console.log('Ready with Device ID', data.device_id)
+    })
+
+    player.on("player_state_ready", function (playbackState) {
+      const current_track = playbackState.track_window.current_track;
+      const current_position = playbackState.position;
+      const current_song_duration = playbackState.duration;
+
+      console.log("Currently Playing", current_track);
+      console.log("Position in Song", current_position);
+      console.log("Duration of Song", current_song_duration);
+    });
+
+    // Connect to the player!
+    player.connect()
+
+    this.setState({player}, () => console.log(this.state.player))
+  }
+
   render() {
     const client_id = 'd59d3b99ecf54e6b8fbff1da8c7f11c6'
     const redirect_uri = "http://localhost:3000/api/v1/auth/spotify/callback/"
-    const scope = 'user-library-read%20streaming%20user-read-birthdate%20user-read-email%20user-read-private'
+    const scope = 'user-library-read%20streaming%20user-read-birthdate%20user-read-email%20user-read-private%20user-modify-playback-state'
     const redirect = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&scope=${scope}`
 
     return (
@@ -103,6 +150,10 @@ class CreatorContainer extends React.Component {
               <input onChange={this.handleSongTitle} type='text' placeholder='enter a song title' value={this.state.songTitle}/>
               <input onClick={this.spotifySearch} type='submit' value='Search'/>
               {this.state.showModal ? <SearchResultsModal songs={this.state.songs} tokens={this.props.tokens} setCurrentSong={this.setCurrentSong} hideModal={this.hideModal}/> : null }
+              
+              {/*  Load in Playback SDK  */}
+              <Script url="https://sdk.scdn.co/spotify-player.js" onError={this.handleScriptError} onLoad={this.handleScriptLoad}/>
+
             </div>
           : 
             <a onClick={this.createInterval} target='_blank' href={redirect}>Test Spotify OAuth</a>

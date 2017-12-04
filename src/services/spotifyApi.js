@@ -14,3 +14,14 @@ export function getAudioFeatures(id, token) {
     }
   }).then(res => res.json())
 }
+
+export function playSong(deviceId, uri, token) {
+  const body = { uris: [uri] }
+  fetch(`https://api.spotify.com/v1/me/player/play?device_id=${deviceId}`, {
+    method: 'PUT',
+    body: JSON.stringify(body),
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+}
