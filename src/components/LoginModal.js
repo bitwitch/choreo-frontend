@@ -28,7 +28,7 @@ class LoginModal extends React.Component {
 
   render() {
     return (
-      <ModalWrapper title='Login' width={400} showOk={false} {...this.props}>
+      <ModalWrapper title='Login' width={300} showOk={false} {...this.props}>
         <form onSubmit={this.handleSubmit}> 
           <input className='input' type='text' onChange={this.handleUsername} placeholder='username' value={this.state.username}/>
           <input className='input' type='password' onChange={this.handlePassword} placeholder='password' value={this.state.password}/>

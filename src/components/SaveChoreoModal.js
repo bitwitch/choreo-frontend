@@ -24,7 +24,7 @@ class SaveChoreoModal extends React.Component {
 
   render() {
     return (
-      <ModalWrapper title='Save Choreography' width={400} showOk={false} {...this.props}>
+      <ModalWrapper title='Save Choreography' width={350} showOk={false} {...this.props}>
         <input onChange={this.handleName} type='text' placeholder='Title' value={this.state.name} />
         <button className='modal-button' onClick={this.handleSave}>Save</button>
       </ModalWrapper> 

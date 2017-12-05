@@ -9,7 +9,8 @@ html, body, div#root, div.app, div.main, div.authorize {
 }
 
 html>body .welcome-container {
-  height:auto;
+  padding-top: 8px;
+  height: auto;
 }
 
 .welcome-container {

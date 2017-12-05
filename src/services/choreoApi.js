@@ -21,6 +21,13 @@ export function saveChoreography(user_id, name, choreo) {
   }).then(res => res.json())
 }
 
+export function fetchAllChoreographies() {
+  return fetch(`${baseURL}/choreographies`, {
+    headers: headers()
+  }).then(res => res.json())
+  .then(json => console.log(json))
+}
+
 export function fetchChoreography(id) {
   return fetch(`${baseURL}/choreographies/${id}`, {
     headers: headers()

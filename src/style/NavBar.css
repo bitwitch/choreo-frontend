@@ -1,64 +1,64 @@
 @import url('https://fonts.googleapis.com/css?family=Carrois+Gothic+SC');
 
 #title {
-    font-family: 'Carrois Gothic SC', sans-serif;
-    font-size: 2em;
-    margin-left: 25%;
-    margin-top: 4px;
-    color: #d03939;
+  font-family: 'Carrois Gothic SC', sans-serif;
+  font-size: 2em;
+  margin-left: 25%;
+  margin-top: 4px;
+  color: #d03939;
 }
 
 .nav {
-    margin-bottom: 46px;
+  margin-bottom: 46px;
 }
 
 .nav ul {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    z-index: 99;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  z-index: 99;
 }
 
 .nav li {
-    float: left;
+  float: left;
 }
 
 .nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 /* Change the link color to #111 (black) on hover */
 .nav li a:hover {
-    background-color: #111;
+  background-color: #111;
 }
 
 .active {
-    background-color: #111;
+  background-color: #111;
 }
 
 #player {
-    float: right;
+  float: right;
 }
 
 #player div {
-    margin-top: 9%;
-    width: 90px;
+  margin-top: 9%;
+  width: 90px;
 }
 
 #player button {
-    background-color: #fff; 
-    margin-left: 5px;
-    border-radius: 20px;
+  background-color: #fff; 
+  margin-left: 5px;
+  border-radius: 20px;
 }
 
 #player button:hover {
@@ -73,5 +73,5 @@
 }
 
 #logout {
-    float: right;
+  float: right;
 }

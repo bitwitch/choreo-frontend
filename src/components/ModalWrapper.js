@@ -22,7 +22,7 @@ const ModalWrapper = props => {
 
   return (
     <div className='modal' onClick={handleBackgroundClick}>
-      <div className='modal-content'>
+      <div className='modal-content' style={{width: props.width}}>
         <header>
           <h1>{props.title}</h1>
 

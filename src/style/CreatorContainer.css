@@ -4,7 +4,39 @@
   justify-content: center; 
 }
 
+.song-data {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-song-data {
+  width: 300px;
+}
+
+.two {
+  padding-left: 200px;
+}
+
 .song-data p {
   display: inline
 }
 
+.spotify-container {
+  position: absolute;
+  right: 200px;
+  top: 15px;
+  z-index: 99;
+}
+
+.spotify-container a {
+  color: #fff; 
+  text-decoration: none;
+  padding-top: 15px;
+  padding-bottom: 13px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.spotify-container a:hover {
+  background-color: #111;
+}

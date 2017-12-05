@@ -1,20 +1,21 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { withRouter } from 'react-router'; 
-import { AuthAdapter as Auth } from '../services/choreoApi';
-import Navbar from './Navbar'; 
-import CreatorContainer from '../containers/CreatorContainer'; 
-import ProfileContainer from '../containers/ProfileContainer';
-import Friend from './Friend'; 
+import React from 'react'
+import { Route, Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router'
+import { AuthAdapter as Auth } from '../services/choreoApi'
+import Navbar from './Navbar'
+import CreatorContainer from '../containers/CreatorContainer'
+import ProfileContainer from '../containers/ProfileContainer'
+import TrendingContainer from '../containers/TrendingContainer'
+import Friend from './Friend'
 import Choreography from './Choreography'
-import { bindActionCreators } from 'redux'; 
-import { connect } from 'react-redux'; 
-import { login_user, logout_user } from '../actions/auth'; 
-import AllChoreographies from './AllChoreographies'; 
-import AllFriends from './AllFriends'; 
-import AllLikes from './AllLikes';
-import WelcomeContainer from '../containers/WelcomeContainer';
-import authorize from './authorize'; 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { login_user, logout_user } from '../actions/auth'
+import AllChoreographies from './AllChoreographies'
+import AllFriends from './AllFriends'
+import AllLikes from './AllLikes'
+import WelcomeContainer from '../containers/WelcomeContainer'
+import authorize from './authorize'
 
 class App extends React.Component {
   login = (loginParams) => {
@@ -77,6 +78,7 @@ class App extends React.Component {
           <Route exact path='/login' render={props => <AuthWelcomeContainer login={this.login} signUp={this.signUp} {...props}/>} />
           <Route exact path='/profile' render={props => <AuthProfileContainer user={this.props.auth.user} {...props}/>} /> 
           <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
+          <Route exact path='/trending' render={props => <TrendingContainer {...props}/>} />
 
           {/* Profile Page Routes*/}
           <Route exact path='/choreographies/:id' render={props => <AuthChoreography {...props} />}/>
@@ -88,7 +90,7 @@ class App extends React.Component {
 
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -105,5 +107,5 @@ function mapDispatchToProps(dispatch) {
   }, dispatch)
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
 

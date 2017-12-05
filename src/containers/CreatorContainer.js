@@ -157,25 +157,28 @@ class CreatorContainer extends React.Component {
       <div className='creator'> 
         <div className='spotify-container'>
           {(this.props.tokens.access && this.props.tokens.refresh) ? 
-            <div>
+            <div className='song-search'>
               <input onChange={this.handleSongTitle} type='text' placeholder='enter a song title' value={this.state.songTitle}/>
               <input onClick={this.spotifySearch} type='submit' value='Search'/>
-              {this.state.showModal ? <SearchResultsModal songs={this.state.songs} tokens={this.props.tokens} setCurrentSong={this.setCurrentSong} hideModal={this.hideModal}/> : null }
+              {this.state.showModal ? <SearchResultsModal songs={this.state.songs} tokens={this.props.tokens} setCurrentSong={this.setCurrentSong} setAccessTokens={this.props.setAccessTokens} hideModal={this.hideModal}/> : null }
               
               {/*  Load in Web Playback SDK script */}
               <Script url="https://sdk.scdn.co/spotify-player.js" onError={this.handleScriptError} onLoad={this.handleScriptLoad}/>
 
             </div>
           : 
-            <a onClick={this.createInterval} target='_blank' href={redirect}>Test Spotify OAuth</a>
+            <a onClick={this.createInterval} target='_blank' href={redirect}>Play Music</a>
           }
         </div>
 
         { this.state.currentSong.tempo ? 
           <div className='song-data'>
-            <p>{this.state.currentSong.title} </p>
-            <p>{Math.round(this.state.currentSong.tempo)} BPM</p>
-            <button onClick={this.matchBPM}>Match Choreography</button>
+            <div className='flex-song-data'></div>
+            <div className='flex-song-data two'>
+              <p>{this.state.currentSong.title} </p>
+              <p>{Math.round(this.state.currentSong.tempo)} BPM</p>
+              <button onClick={this.matchBPM}>Match Choreography</button>
+            </div>
           </div>
         : null}
 
