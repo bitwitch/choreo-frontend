@@ -1,6 +1,7 @@
 import React from 'react'
 import ModalWrapper from './ModalWrapper'
 import { getAudioFeatures } from '../services/spotifyApi'
+import { refreshToken } from '../services/choreoApi'
 import '../style/SearchResultsModal.css'
 
 class SearchResultsModal extends React.Component {
@@ -10,8 +11,19 @@ class SearchResultsModal extends React.Component {
     const songTitle = e.target.getAttribute('songtitle')
 
     getAudioFeatures(songId, this.props.tokens.access)
-      .then(json => this.props.setCurrentSong(songId, songTitle, json.tempo))
-      this.props.hideModal()
+    .then(json => {
+      if (json.tempo) {
+        this.props.setCurrentSong(songId, songTitle, json.tempo)
+      } else {
+        refreshToken(this.props.tokens.refresh).then(json => {
+          if (json.access_token) {
+            this.props.setAccessTokens(json.access_token, this.props.tokens.refresh)
+          }
+        })
+      }
+    })
+    
+    this.props.hideModal()
   }
 
   render() {
