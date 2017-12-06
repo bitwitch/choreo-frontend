@@ -18,7 +18,9 @@ class ProfileContainer extends React.Component {
           <FriendsCard friends={user.friends}/>
           <FavoritesCard likes={user.likes}/>
         </div>
-        <button>Edit Profile</button>
+        <div className='edit-wrapper'>
+          <button>Edit Profile</button>
+        </div>
       </div>
     )
   }

@@ -1,0 +1,26 @@
+.save-button-wrapper {
+  text-align: center;
+}
+
+.save-button-wrapper button {
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 1.1em;
+  margin-top: 1em;
+  padding: 0 1em;
+}
+
+.save-button-wrapper button:hover {
+  background-color: #999;
+}
+
+.divider {
+  margin-top: -15px;
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+}
+
+.choreography-container {
+  padding-bottom: 100%;
+  background-color: #cfd6d1;
+}

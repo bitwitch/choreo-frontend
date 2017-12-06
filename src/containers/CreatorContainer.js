@@ -174,7 +174,8 @@ class CreatorContainer extends React.Component {
         { this.state.currentSong.tempo ? 
           <div className='song-data'>
             <div className='flex-song-data'></div>
-            <div className='flex-song-data two'>
+            <div className='flex-song-data'></div>
+            <div className='flex-song-data three'>
               <p>{this.state.currentSong.title} </p>
               <p>{Math.round(this.state.currentSong.tempo)} BPM</p>
               <button onClick={this.matchBPM}>Match Choreography</button>

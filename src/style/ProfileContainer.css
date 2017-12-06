@@ -1,7 +1,31 @@
+.profile-wrapper {
+  padding: 10% 0 20% 0;
+  background-color: #939393;
+  background-image: url(https://i.imgur.com/nnzOFLt.png);
+  background-size: cover; 
+}
+
 .profile-container {
-  margin-top: 125px;
+  background-color: rgba(0,0,0,0.22);
+  padding-top: 5%;
   display: flex;
   flex-flow: row wrap; 
+}
+
+.profile-container a {
+  text-decoration: none;
+}
+
+.link {
+  display: block;
+  font-family: 'PT Serif Caption', serif;
+  color: #000;
+  width: 100%;
+}
+
+a.link:hover {
+  background-color: #3fb574;
+  color: #fff;
 }
 
 .user-card-container {
@@ -14,20 +38,28 @@
   width: 200px;
   height: 400px;
   margin: 0 auto 50px auto;
-  border: solid 1px #000;
+  /*border: solid 1px #000;*/
+  border-radius: 10px;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.30);
 }
 
 .card-container ul {
-  padding: 0 1em;
+  margin-top: 12px;
+  padding: 0;
 }
 
 .card-container li {
   list-style: none;
 }
 
+.card-container h4 {
+  font-family: 'Arial', sans-serif;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
 .card-footer {
-  background-color: #b0b0b0;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -35,9 +67,16 @@
 }
 
 .footer-link {
+  display: block;
+  padding-top: 10px;
+  height: 30px;
+  color: #c7ccc9;
   text-decoration: none;
   position: relative;
-  top: 10px;
+  top: 0;
+  background-color: #333;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .footer-link:visited {
@@ -45,5 +84,25 @@
 }
 
 .footer-link:hover {
-  text-decoration: underline;
+  background-color: #111;
+  color: #fff;
+}
+
+.edit-wrapper {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.edit-wrapper button {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5em;
+    border: 2px solid #333;
+    border-radius: 13px;
+    background: none;
+    padding: 5px 33px;
+}
+
+.edit-wrapper button:hover {
+  background-color: #333;
+  color: #fff;
 }

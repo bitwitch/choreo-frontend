@@ -13,7 +13,7 @@
   width: 300px;
 }
 
-.two {
+.three {
   padding-left: 200px;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .spotify-container {
-  position: absolute;
+  position: fixed;
   right: 200px;
   top: 15px;
   z-index: 99;

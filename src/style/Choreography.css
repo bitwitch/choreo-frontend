@@ -1,3 +1,17 @@
 .back {
   background: none;
 }
+
+.back, .choreo-title {
+  margin-left: 120px;
+}
+
+.choreography-playback-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+
+.choreography-playback {
+  text-align: center;
+}

@@ -25,10 +25,12 @@ class Choreography extends React.Component {
   
   render() {
     return (
-      <div>
-        Choreography: {this.state.name}
-        <PlaybackContainer playbackSpeed={75}/>
-        <NavLink className='back' to='/choreographies'>Back To All</NavLink> 
+      <div className='choreography-playback-wrapper'>
+        <div className='choreography-playback'>
+          <h1 className='choreo-title'>Choreography Title: {this.state.name}</h1>
+          <PlaybackContainer playbackSpeed={75}/>
+          <NavLink className='back' to='/choreographies'>Back To All</NavLink> 
+        </div>
       </div>
     )
   }

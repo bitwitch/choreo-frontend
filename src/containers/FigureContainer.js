@@ -34,9 +34,13 @@ class FigureContainer extends React.Component {
   render() {
     return (
       <div className='figure-container'> 
-        <Figure setCurrentPose={this.props.setCurrentPose} />
-        <button onClick={this.onAddPose}>Add Pose</button>
-        <button onClick={this.props.reset}>Reset</button>
+        <div className='figure-buttons'>
+          <button id='add-pose' onClick={this.onAddPose}>+</button>
+          <button id='reset-pose' onClick={this.props.reset}>↺</button>
+        </div>
+        <div className='figure-wrapper'>
+          <Figure setCurrentPose={this.props.setCurrentPose} />
+        </div>
       </div> 
     )
   }

@@ -7,6 +7,8 @@
 }
 
 .user-card p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2em;
   text-align: center; 
   line-height: .5em; 
 }

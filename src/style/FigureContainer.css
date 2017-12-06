@@ -1,4 +1,38 @@
 .figure-container {
-  width: 301px;
+  width: 500px;
+  height: 300px;
   padding-top: 54px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.figure-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.figure-buttons button {
+  font-size: 2em;
+  height: 3em;
+  width: 3em;
+  border-radius: 50%;
+  background-color: #d7d7d7;
+}
+
+#add-pose {
+  padding-bottom: 6px;
+}
+
+#add-pose:hover {
+  background-color: #42dd6e;
+}
+
+#reset-pose:hover {
+  background-color: #33a9f4;
+}
+
+button:focus {
+  outline: none;
 }
