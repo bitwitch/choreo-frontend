@@ -19,8 +19,7 @@ class CreatorContainer extends React.Component {
     showModal: false,
     currentSong: {id: '', title: '', tempo: null},
     playbackSpeed: 75,
-    switch: false,
-    player: null
+    switch: false
   }
 
   handleSongTitle = (e) => {
@@ -99,10 +98,6 @@ class CreatorContainer extends React.Component {
       this.setState({
         playbackSpeed
       }))
-  }
-
-  resetPlaybackSpeed = () => {
-    this.setState({playbackSpeed: 75})
   }
 
   handleScriptError = () => {

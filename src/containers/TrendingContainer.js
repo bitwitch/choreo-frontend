@@ -9,16 +9,14 @@ class TrendingContainer extends React.Component {
 
   componentDidMount() {
     fetchAllChoreographies()
-      // .then(json => console.log(json))
+      .then(json => this.props.storeChoreographies(json.choreographies))
   }
 
   render() {
-    const popular  = this.props.allChoreographies.sort((a,b) => a.likes.length - b.likes.length)
-    const trending = popular.map((choreo, i) => {
-      return <li key={i}><NavLink to={`/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}</NavLink></li>
+    const names = ["Luke", "David", "Alice", "Izzy"]
+    const trending = this.props.allChoreographies.map((choreo, i) => {
+      return <li key={i}><NavLink to={`/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}</NavLink> - by {names[Math.floor(Math.random() * names.length)]}</li>
     })
-
-    console.log(this.props.allChoreographies)
 
     return (
       <div className='all-choreographies'>
