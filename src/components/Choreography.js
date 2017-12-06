@@ -68,7 +68,7 @@ class Choreography extends React.Component {
     })
 
     const currentTrack = this.state.songs.find(song => song.id === id)
-    playSong(this.props.player._options.id, currentTrack.uri, this.props.tokens.access)
+    playSong(this.props.player.instance._options.id, currentTrack.uri, this.props.tokens.access)
   }
 
   matchBPM = () => {

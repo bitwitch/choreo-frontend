@@ -1,39 +1,36 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { play, stop } from '../actions/player'
 import '../style/NavBar.css'
 
 class Navbar extends React.Component {
-  state = {
-    playing: false
-  }
-
   handleClick = (e) => {
     e.preventDefault()
     this.props.logout()
   }
 
   handlePause = () => {
-    this.props.player.togglePlay() 
-    this.setState({playing: false})
+    this.props.player.instance.togglePlay() 
+    this.props.stop()
   }
 
   handlePlay = () => {
-    this.props.player.togglePlay()
-    this.setState({playing: true})
+    this.props.player.instance.togglePlay()
+    this.props.play()
   }
 
   handleStop = () => {
-    this.props.player.togglePlay()
-    this.props.player.seek(0)
-    this.setState({playing: false})
+    if (this.props.player.playing) {
+      this.props.player.instance.togglePlay()
+      this.props.player.instance.seek(0)
+      this.props.stop()
+    }
   }
 
   render() {
-
-    if (this.props.player) console.log(this.props.player)
-
-    const playPauseButton = (this.state.playing) ? 
+    const playPauseButton = (this.props.player.playing) ? 
       <button onClick={this.handlePause}><img height={20} width={20} src='https://i.imgur.com/Qo6uE4L.png' alt='Pause'/></button>
     :
       <button onClick={this.handlePlay}><img height={20} width={20} src='https://i.imgur.com/NTz3SDu.png' alt='Play'/></button>
@@ -47,7 +44,7 @@ class Navbar extends React.Component {
           <li><NavLink to='/trending'>Trending</NavLink></li>
           <li id='title'>Shaker Maker</li>
           <li id='logout'><NavLink onClick={this.handleClick} to='/logout'>Logout</NavLink></li>
-          {this.props.player ? 
+          {this.props.player.instance ? 
             <li id='player'>
               <div>
                 {playPauseButton}
@@ -67,11 +64,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Navbar)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    play,
+    stop
+  }, dispatch)
+}
 
-
-
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 

@@ -4,3 +4,15 @@ export function addPlayer(player) {
     payload: player
   }
 }
+
+export function play() {
+  return {
+    type: 'PLAY'
+  }
+}
+
+export function stop() {
+  return {
+    type: 'STOP'
+  }
+}

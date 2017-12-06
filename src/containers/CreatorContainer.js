@@ -6,7 +6,7 @@ import SearchResultsModal from '../components/SearchResultsModal'
 import { waitForSpotify, refreshToken } from '../services/choreoApi'
 import { fetchSpotifySearch, playSong } from '../services/spotifyApi'
 import { setAccessTokens } from '../actions/auth'
-import { addPlayer } from '../actions/player'
+import { addPlayer, play } from '../actions/player'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Script from 'react-load-script' 
@@ -87,7 +87,8 @@ class CreatorContainer extends React.Component {
     })
 
     const currentTrack = this.state.songs.find(song => song.id === id)
-    playSong(this.props.player._options.id, currentTrack.uri, this.props.tokens.access)
+    playSong(this.props.player.instance._options.id, currentTrack.uri, this.props.tokens.access)
+    this.props.play()
   }
 
   matchBPM = () => {
@@ -179,7 +180,7 @@ class CreatorContainer extends React.Component {
         : null}
 
         <div className='creator-top'>
-          <FigureContainer />
+          <FigureContainer/>
           <PlaybackContainer switch={this.state.switch} playbackSpeed={this.state.playbackSpeed}/>
         </div>
         <ChoreographyContainer />
@@ -198,7 +199,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     setAccessTokens,
-    addPlayer
+    addPlayer,
+    play
   }, dispatch)
 }
 

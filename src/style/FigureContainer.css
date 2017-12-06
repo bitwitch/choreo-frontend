@@ -1,24 +1,92 @@
 .figure-container {
-  width: 500px;
-  height: 300px;
   padding-top: 54px;
   text-align: center;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 150px auto 150px;
+  grid-template-rows: 350px;
+  grid-column-gap: 10px;
 }
 
-.figure-buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
+.label {
+  display: inline-block;
+  background-color: #fff; 
+  margin-top: 36px;
+  padding: 5px 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.2em;
 }
 
-.figure-buttons button {
+.reset {
+  padding: 10px;
+}
+
+.tweeter-wrapper {
+  width: 150px;
+  margin-top: 30px;
+}
+
+.tweeter {
+  margin: 0 auto;
+  display: block;
+  height: 3em; 
+  width: 3em;
+  border-radius: 50%;
+  background-color: #626364;
+  animation-name: tweeter_pulse;
+  animation-duration: 500ms;
+  transform-origin: 50% 50%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.speaker {
+  height: 300px;
+  margin-top: 50px;
+  background-color: #333;
+  border-radius: 20px;
+}
+
+.speaker button {
   font-size: 2em;
   height: 3em;
   width: 3em;
   border-radius: 50%;
   background-color: #d7d7d7;
+  margin-top: 20px;
+  animation-name: woofer_pulse;
+  animation-duration: 1000ms;
+  transform-origin: 50% 50%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes woofer_pulse {
+  0% { transform: scale(1); }
+  30% { transform: scale(1); }
+  40% { transform: scale(1.08); }
+  50% { transform: scale(1); }
+  60% { transform: scale(1); }
+  70% { transform: scale(1.05); }
+  80% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes tweeter_pulse {
+  0% { transform: scale(1); }
+  10% { transform: scale(1.01) }
+  30% { transform: scale(1); }
+  40% { transform: scale(1.03); }
+  50% { transform: scale(1); }
+  60% { transform: scale(1.01); }
+  70% { transform: scale(1); }
+  80% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.platform {
+  height: 20px;
+  background-color: #c0b27e;
 }
 
 #add-pose {
@@ -26,10 +94,12 @@
 }
 
 #add-pose:hover {
+  border-color: #42dd6e;
   background-color: #42dd6e;
 }
 
 #reset-pose:hover {
+  border-color: #33a9f4;
   background-color: #33a9f4;
 }
 
