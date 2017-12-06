@@ -149,6 +149,17 @@ class CreatorContainer extends React.Component {
     const scope = 'user-library-read%20streaming%20user-read-birthdate%20user-read-email%20user-read-private%20user-modify-playback-state'
     const redirect = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&scope=${scope}`
 
+    const creatorTopStyle = this.props.player.playing ? 
+      { 
+        animationName: 'color_cycle',
+        animationDuration: '5s',
+        animationIterationCount: 'infinite',
+        animationTimingFunction: 'linear'
+      } 
+    : 
+      {backgroundColor: '#fff'} 
+    ;
+
     return (
       <div className='creator'> 
         <div className='spotify-container'>
@@ -168,7 +179,7 @@ class CreatorContainer extends React.Component {
         </div>
 
         { this.state.currentSong.tempo ? 
-          <div className='song-data'>
+          <div className='song-data' style={creatorTopStyle}>
             <div className='flex-song-data'></div>
             <div className='flex-song-data'></div>
             <div className='flex-song-data three'>
@@ -179,7 +190,7 @@ class CreatorContainer extends React.Component {
           </div>
         : null}
 
-        <div className='creator-top'>
+        <div className='creator-top' style={creatorTopStyle}>
           <FigureContainer/>
           <PlaybackContainer switch={this.state.switch} playbackSpeed={this.state.playbackSpeed}/>
         </div>

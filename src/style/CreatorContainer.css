@@ -2,6 +2,13 @@
   display: flex;
   flex-flow: row wrap; 
   justify-content: center; 
+
+/*  background-color: #fff;
+
+  animation-name: color_cycle;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;*/
 }
 
 .song-data {
@@ -40,3 +47,23 @@
 .spotify-container a:hover {
   background-color: #111;
 }
+
+@keyframes color_cycle {
+    0% {background-color: hsla(0, 44%, 16%, 0.36)}
+    10% {background-color: hsla(36, 44%, 16%, 0.36)}
+    20% {background-color: hsla(72, 44%, 16%, 0.36)}
+    30% {background-color: hsla(108, 44%, 16%, 0.36)}
+    40% {background-color: hsla(144, 44%, 16%, 0.36)}
+    50% {background-color: hsla(180, 44%, 16%, 0.36)}
+    60% {background-color: hsla(216, 44%, 16%, 0.36)}
+    70% {background-color: hsla(252, 44%, 16%, 0.36)}
+    80% {background-color: hsla(288, 44%, 16%, 0.36)}
+    90% {background-color: hsla(324, 44%, 16%, 0.36)}
+    100% {background-color: hsla(360, 44%, 16%, 0.36)}
+}
+
+
+/*
+Color Cycle 
+HSL(0-255, 41%, 16%, 0.36)
+*/
