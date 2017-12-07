@@ -6,6 +6,8 @@ import Navbar from './Navbar'
 import CreatorContainer from '../containers/CreatorContainer'
 import ProfileContainer from '../containers/ProfileContainer'
 import TrendingContainer from '../containers/TrendingContainer'
+import Demo1 from './Demo1'
+import Demo2 from './Demo2'
 import Friend from './Friend'
 import Choreography from './Choreography'
 import { bindActionCreators } from 'redux'
@@ -79,6 +81,8 @@ class App extends React.Component {
           <Route exact path='/profile' render={props => <AuthProfileContainer user={this.props.auth.user} {...props}/>} /> 
           <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
           <Route exact path='/trending' render={props => <TrendingContainer {...props}/>} />
+          <Route exact path='/demo1' render={props => <Demo1 {...props}/>} />
+          <Route exact path='/demo2' render={props => <Demo2 {...props}/>} />
 
           {/* Profile Page Routes*/}
           <Route exact path='/choreographies/:id' render={props => <AuthChoreography {...props} />}/>

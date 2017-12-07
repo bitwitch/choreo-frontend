@@ -24,7 +24,7 @@ class FigureContainer extends React.Component {
         const newPoints = line.props.points.map(point => point/2); 
         return <Line key={++i} points={newPoints} stroke='#000' strokeWidth={3} />;
       }
-    });
+    })
   } 
 
   componentWillMount() {
