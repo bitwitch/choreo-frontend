@@ -1,10 +1,10 @@
-import React from 'react'; 
-import { connect } from 'react-redux'; 
-import { Line, Ellipse, Stage, Layer } from 'react-konva'; 
-import Slider from 'react-rangeslider'; 
+import React from 'react'
+import { connect } from 'react-redux'
+import { Line, Ellipse, Stage, Layer } from 'react-konva'
+import Slider from 'react-rangeslider'
 import { bindActionCreators } from 'redux'
-import { resetPoses } from '../actions/poses'; 
-import '../style/PlaybackContainer.css'; 
+import { resetPoses } from '../actions/poses'
+import '../style/PlaybackContainer.css'
 
 class PlaybackContainer extends React.Component {
   state = {
@@ -34,35 +34,50 @@ class PlaybackContainer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.frameCounter !== this.state.frameCounter || nextState.playing !== this.state.playing || nextState.playbackSpeed !== this.state.playbackSpeed) return true;
-    return nextProps.poses.list.length === this.props.poses.list.length ? false : true;
+    if (nextState.frameCounter !== this.state.frameCounter 
+      || nextState.playing !== this.state.playing 
+      || nextState.playbackSpeed !== this.state.playbackSpeed) {
+        return true
+
+    } else {
+      return nextProps.poses.list.length === this.props.poses.list.length ? false : true
+    }
   }
 
   resizePose = (lines) => {
     let i = 0;
     return lines.map(line => {
       if (line.type === 'Ellipse') {
-        const newCenterX = line.props.x * 2;
-        const newCenterY = line.props.y * 2; 
-        return <Ellipse key={++i} x={newCenterX} y={newCenterY} radius={{x: 10, y: 14}} stroke='#000' strokeWidth={4}/>;
+        const newCenterX = line.props.x * 2
+        const newCenterY = line.props.y * 2 
+        return (
+          <Ellipse 
+            key={++i} 
+            x={newCenterX} 
+            y={newCenterY} 
+            radius={{x: 10, y: 14}} 
+            stroke='#000' 
+            strokeWidth={4}
+          />
+        )
       } else {
-        const newPoints = line.props.points.map(point => point*2); 
-        return <Line key={++i} points={newPoints} stroke='#000' strokeWidth={4} />;
+        const newPoints = line.props.points.map(point => point*2)
+        return <Line key={++i} points={newPoints} stroke='#000' strokeWidth={4} />
       }
-    });
+    })
   }
 
   playbackTimer = () => {
-    if (!this.state.playing) return false;
+    if (!this.state.playing) return false
 
     const timeInterval = (100 - this.state.playbackSpeed) * 10
-    const newFrameCount = this.state.frameCounter >= this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1;
+    const newFrameCount = this.state.frameCounter >= this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1
     this.setState({frameCounter: newFrameCount})
     this.timeout = setTimeout(this.playbackTimer, timeInterval)
   }
 
   handlePlay = () => {
-    if (this.state.frames.length === 0 || this.state.playing) return false; 
+    if (this.state.frames.length === 0 || this.state.playing) return false 
     
     this.setState({
       playing: true
@@ -89,11 +104,15 @@ class PlaybackContainer extends React.Component {
   }
 
   render() {
-    const currentFrame = this.state.frames[this.state.frameCounter];
+    const currentFrame = this.state.frames[this.state.frameCounter]
     const playPauseButton = this.state.playing ? 
-      <button onClick={this.handlePause}><img height={20} width={20} src='https://i.imgur.com/Qo6uE4L.png' alt='Pause'/></button>
+      <button onClick={this.handlePause}>
+        <img height={20} width={20} src='https://i.imgur.com/Qo6uE4L.png' alt='Pause'/>
+      </button>
     :
-      <button onClick={this.handlePlay}><img height={20} width={20} src='https://i.imgur.com/NTz3SDu.png' alt='Play'/></button>
+      <button onClick={this.handlePlay}>
+        <img height={20} width={20} src='https://i.imgur.com/NTz3SDu.png' alt='Play'/>
+      </button>
     ;
 
     return (
@@ -106,14 +125,22 @@ class PlaybackContainer extends React.Component {
 
         <div className='button-container'>
           {playPauseButton}
-          <button onClick={this.handleStop}><img height={20} width={20} src='https://i.imgur.com/unx98ZO.png' alt='Stop'/></button>
+          <button onClick={this.handleStop}>
+            <img height={20} width={20} src='https://i.imgur.com/unx98ZO.png' alt='Stop'/>
+          </button>
         </div>
 
-        <Slider onChange={this.handlePlaybackSpeed} min={0} max={100} value={this.state.playbackSpeed} tooltip={false} />
+        <Slider 
+          onChange={this.handlePlaybackSpeed} 
+          min={0} 
+          max={100} 
+          value={this.state.playbackSpeed} 
+          tooltip={false} 
+        />
       </div> 
     )
   }
-}; 
+}
 
 function mapStateToProps(state) {
   return {
@@ -127,5 +154,5 @@ function mapDispatchToProps(dispatch) {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaybackContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PlaybackContainer)
 

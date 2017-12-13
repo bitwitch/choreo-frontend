@@ -15,17 +15,17 @@ const defaultState = {
   kneeRight: { x: 165, y: 218 },
   footLeft: { x: 135, y: 285 },
   footRight: { x: 165, y: 285 }
-};
+}
 
 export default function jointReducer(state=defaultState, action) {
   switch(action.type) {
     case 'MOVE_JOINT':
-      const {name, x, y} = action.payload;
-      const newJoint = { [name]: {x, y} }; 
-      return {...state, ...newJoint}; 
+      const {name, x, y} = action.payload
+      const newJoint = { [name]: {x, y} } 
+      return {...state, ...newJoint}
     case 'RESET':
       return {...defaultState}
     default: 
-      return state;
+      return state
   }
 }

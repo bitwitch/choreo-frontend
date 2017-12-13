@@ -24,7 +24,7 @@ class App extends React.Component {
     Auth.login(loginParams)
     .then(user => {
       if (!user.error){
-        this.props.login_user(user) // dispatch action to redux store 
+        this.props.login_user(user)  
         localStorage.setItem('jwt', user.jwt)
         localStorage.setItem('user_id', user.info.id)
         this.props.history.push('/choreo')
@@ -35,7 +35,7 @@ class App extends React.Component {
   logout = () => {
     localStorage.removeItem('jwt')
     localStorage.removeItem('user_id')
-    this.props.logout_user() // dispatch action to redux store 
+    this.props.logout_user() 
   }
 
   loggedIn = () => {
@@ -46,7 +46,7 @@ class App extends React.Component {
     Auth.signUp(signUpParams)
     .then(user => {
       if (!user.error){
-        this.props.login_user(user) // dispatch action to redux store 
+        this.props.login_user(user) 
         localStorage.setItem('jwt', user.jwt)
         localStorage.setItem('user_id', user.info.id)
         this.props.history.push('/choreo')
@@ -71,6 +71,9 @@ class App extends React.Component {
     const AuthAllChoreographies = authorize(AllChoreographies)
     const AuthAllFriends        = authorize(AllFriends) 
     const AuthAllLikes          = authorize(AllLikes)  
+    const AuthDemo1             = authorize(Demo1)
+    const AuthDemo2             = authorize(Demo2)
+    const AuthTrendingContainer = authorize(TrendingContainer)
 
     return (
       <div className='app'>
@@ -80,9 +83,9 @@ class App extends React.Component {
           <Route exact path='/login' render={props => <AuthWelcomeContainer login={this.login} signUp={this.signUp} {...props}/>} />
           <Route exact path='/profile' render={props => <AuthProfileContainer user={this.props.auth.user} {...props}/>} /> 
           <Route exact path='/choreo' render={props => <AuthCreatorContainer {...props}/>} />
-          <Route exact path='/trending' render={props => <TrendingContainer {...props}/>} />
-          <Route exact path='/demo1' render={props => <Demo1 {...props}/>} />
-          <Route exact path='/demo2' render={props => <Demo2 {...props}/>} />
+          <Route exact path='/trending' render={props => <AuthTrendingContainer {...props}/>} />
+          <Route exact path='/demo1' render={props => <AuthDemo1 {...props}/>} />
+          <Route exact path='/demo2' render={props => <AuthDemo2 {...props}/>} />
 
           {/* Profile Page Routes*/}
           <Route exact path='/choreographies/:id' render={props => <AuthChoreography {...props} />}/>
