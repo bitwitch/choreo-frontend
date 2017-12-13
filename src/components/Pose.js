@@ -1,8 +1,8 @@
-import React from 'react'; 
-import { Stage, Layer, Text } from 'react-konva';
-import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom'; 
-import { DragSource, DropTarget } from 'react-dnd';
+import React from 'react' 
+import { Stage, Layer, Text } from 'react-konva'
+import PropTypes from 'prop-types'
+import { findDOMNode } from 'react-dom' 
+import { DragSource, DropTarget } from 'react-dnd'
 
 const poseSource = {
   beginDrag(props) {
@@ -16,6 +16,7 @@ const poseTarget = {
   hover(props, monitor, component) {
     const dragIndex = monitor.getItem().index
     const hoverIndex = props.index
+
     // Don't replace items with themselves
     if (dragIndex === hoverIndex) {
       return
@@ -33,10 +34,6 @@ const poseTarget = {
     // Get pixels to the left
     const hoverClientX = clientOffset.x - hoverBoundingRect.left
 
-    // Only perform the move when the mouse has crossed half of the items height
-    // When dragging downwards, only move when the cursor is below 50%
-    // When dragging upwards, only move when the cursor is above 50%
-
     // Dragging right
     if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
       return
@@ -46,13 +43,7 @@ const poseTarget = {
       return
     }
 
-    // Time to actually perform the action
-    props.movePose(dragIndex, hoverIndex) // dispatch action to Redux store
-
-    // Note: we're mutating the monitor item here!
-    // Generally it's better to avoid mutations,
-    // but it's good here for the sake of performance
-    // to avoid expensive index searches.
+    props.movePose(dragIndex, hoverIndex) 
     monitor.getItem().index = hoverIndex
   }
 }
@@ -73,11 +64,11 @@ function targetCollect(connect) {
 class Pose extends React.Component {
 
   handleRemovePose = () => {
-    this.props.removePose(this.props.pose.id);
+    this.props.removePose(this.props.pose.id)
   }
 
   render() {
-    const { connectDragSource, connectDropTarget, isDragging, pose } = this.props;
+    const { connectDragSource, connectDropTarget, isDragging, pose } = this.props
     return connectDropTarget(
       connectDragSource(
         <div className='pose' style={{ opacity: isDragging ? 0.5 : 1 }}>
@@ -95,12 +86,14 @@ class Pose extends React.Component {
             </Layer>
           </Stage>
 
-          <div className='move-wrapper'><p className='move'>⟸&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;⟹</p></div>
+          <div className='move-wrapper'>
+            <p className='move'>⟸&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;⟹</p>
+          </div>
         </div>
       )
     )
   }
-}; 
+} 
 
 Pose.propTypes = {
   pose: PropTypes.object,
@@ -108,9 +101,9 @@ Pose.propTypes = {
   movePose: PropTypes.func,
   connectDragSource: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired
-};
+}
 
-export default DropTarget('pose', poseTarget, targetCollect)(DragSource('pose', poseSource, sourceCollect)(Pose));
+export default DropTarget('pose', poseTarget, targetCollect)(DragSource('pose', poseSource, sourceCollect)(Pose))
 
 
 

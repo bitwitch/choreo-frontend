@@ -1,10 +1,14 @@
-import React from 'react'; 
-import { NavLink } from 'react-router-dom'; 
+import React from 'react' 
+import { NavLink } from 'react-router-dom' 
 
 class FriendsCard extends React.Component {
   render() {
     const friends = this.props.friends.slice(0, 15).map((friend, i) => {
-      return <li key={i}><NavLink className='link' to={`/friends/${friend.id}`}>{friend.username}</NavLink></li>
+      return (
+        <li key={i}>
+          <NavLink className='link' to={`/friends/${friend.id}`}>{friend.username}</NavLink>
+        </li>
+      )
     })
 
     return (
@@ -20,6 +24,6 @@ class FriendsCard extends React.Component {
       </div> 
     )
   }
-}; 
+} 
 
-export default FriendsCard;
+export default FriendsCard

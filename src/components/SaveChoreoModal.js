@@ -1,6 +1,6 @@
-import React from 'react'; 
-import ModalWrapper from './ModalWrapper'; 
-import '../style/Modal.css';
+import React from 'react' 
+import ModalWrapper from './ModalWrapper' 
+import '../style/Modal.css'
 
 class SaveChoreoModal extends React.Component {
 
@@ -25,11 +25,16 @@ class SaveChoreoModal extends React.Component {
   render() {
     return (
       <ModalWrapper title='Save Choreography' width={350} showOk={false} {...this.props}>
-        <input onChange={this.handleName} type='text' placeholder='Title' value={this.state.name} />
+        <input 
+          onChange={this.handleName} 
+          type='text' 
+          placeholder='Title' 
+          value={this.state.name} 
+        />
         <button className='modal-button' onClick={this.handleSave}>Save</button>
       </ModalWrapper> 
     )
   }
-}; 
+} 
 
-export default SaveChoreoModal;
+export default SaveChoreoModal

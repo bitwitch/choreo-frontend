@@ -1,6 +1,6 @@
-import React from 'react'; 
-import { NavLink } from 'react-router-dom'; 
-import { fetchFriend } from '../services/choreoApi';
+import React from 'react'
+import { NavLink } from 'react-router-dom' 
+import { fetchFriend } from '../services/choreoApi'
 
 class Friend extends React.Component {
   state = {
@@ -25,7 +25,12 @@ class Friend extends React.Component {
 
   render() {
     const {username, age, location, choreographies} = this.state.friend
-    const choreos = choreographies.map((choreo,i) => <li key={i}><NavLink to={`/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}</NavLink></li>)
+    const choreos = choreographies.map((choreo,i) => (
+      <li key={i}>
+        <NavLink to={`/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}</NavLink>
+      </li>
+    ))
+    
     return (
       <div> 
         <p>{username}</p>
@@ -35,6 +40,6 @@ class Friend extends React.Component {
       </div>
     )
   }
-}; 
+} 
 
-export default Friend;
+export default Friend

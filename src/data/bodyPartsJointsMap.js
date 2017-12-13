@@ -59,7 +59,7 @@ export const bodyMap = {
     start: 'neck', 
     stop: 'pelvis'
   }
-};
+}
 
 export const jointChildren = {
   headTop: [],
@@ -78,7 +78,7 @@ export const jointChildren = {
   kneeRight: ['footRight'],
   footLeft: [],
   footRight: []
-};
+}
 
 export const pivotMap = {
   headTop: {pivot: 'headBottom', radius: 20},

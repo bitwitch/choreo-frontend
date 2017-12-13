@@ -98,9 +98,24 @@ class Choreography extends React.Component {
         <div className='spotify-container'>
           {(this.props.tokens.access && this.props.tokens.refresh) ? 
             <div className='song-search'>
-              <input onChange={this.handleSongTitle} type='text' placeholder='enter a song title' value={this.state.songTitle}/>
+              <input 
+                onChange={this.handleSongTitle} 
+                type='text' 
+                placeholder='enter a song title' 
+                value={this.state.songTitle}
+              />
               <input onClick={this.spotifySearch} type='submit' value='Search'/>
-              {this.state.showModal ? <SearchResultsModal songs={this.state.songs} tokens={this.props.tokens} setCurrentSong={this.setCurrentSong} setAccessTokens={this.props.setAccessTokens} hideModal={this.hideModal}/> : null }
+
+              {this.state.showModal ? 
+                <SearchResultsModal 
+                  songs={this.state.songs} 
+                  tokens={this.props.tokens} 
+                  setCurrentSong={this.setCurrentSong} 
+                  setAccessTokens={this.props.setAccessTokens} 
+                  hideModal={this.hideModal}
+                /> 
+              : null }
+
             </div>
           : null}
         </div>
@@ -120,7 +135,10 @@ class Choreography extends React.Component {
         <div className='choreography-playback-wrapper'>
           <div className='choreography-playback'>
             <h1 className='choreo-title'>Choreography Title: {this.state.name}</h1>
-            <PlaybackContainer switch={this.state.switch} playbackSpeed={this.state.playbackSpeed}/>
+            <PlaybackContainer 
+              switch={this.state.switch} 
+              playbackSpeed={this.state.playbackSpeed}
+            />
             <NavLink className='back' to='/choreographies'>Back To All</NavLink> 
           </div>
         </div>

@@ -11,6 +11,6 @@ const rootReducer = combineReducers({
   auth: authReducer,
   allChoreographies: choreographiesReducer,
   player: playerReducer
-});
+})
 
-export default rootReducer; 
+export default rootReducer

@@ -16,9 +16,18 @@ class Demo1 extends React.Component {
       poses.forEach(pose => {
         const lines = pose.lines.map(line => {
           if (line.type === 'Ellipse') {
-            return <Ellipse key={++i} x={line.props.x} y={line.props.y} radius={{x: 5, y: 7}} stroke='#000' strokeWidth={3}/>;
+            return (
+              <Ellipse 
+                key={++i} 
+                x={line.props.x} 
+                y={line.props.y} 
+                radius={{x: 5, y: 7}} 
+                stroke='#000' 
+                strokeWidth={3}
+              />
+            )
           } else {
-            return <Line key={++i} points={line.props.points} stroke='#000' strokeWidth={3} />;
+            return <Line key={++i} points={line.props.points} stroke='#000' strokeWidth={3} />
           }
         })
 

@@ -104,7 +104,8 @@ class JointLayer extends React.Component {
 
   dragBound = function(pos) {
     const pivot = this.attrs.findPivot(this.attrs.name)
-    const scale = pivot.radius / Math.sqrt(Math.pow(pos.x - pivot.x, 2) + Math.pow(pos.y - pivot.y, 2))
+    const stretch = Math.sqrt(Math.pow(pos.x - pivot.x, 2) + Math.pow(pos.y - pivot.y, 2))
+    const scale = pivot.radius / stretch
 
     if(scale !== 1 && this.attrs.name !== 'pelvis') {
       return {

@@ -1,10 +1,10 @@
-import React from 'react'; 
-import '../style/UserCard.css';
+import React from 'react' 
+import '../style/UserCard.css'
 
 class UserCard extends React.Component {
   render() {
     const {photo, name, age, location} = this.props.info
-    const src = photo.url ? photo.url : 'https://i.imgur.com/7v1z6QJ.jpg'; 
+    const src = photo.url ? photo.url : 'https://i.imgur.com/7v1z6QJ.jpg' 
     return (
       <div className='user-card-container'>
         <div className='user-card'>
@@ -16,6 +16,6 @@ class UserCard extends React.Component {
       </div>
     )
   }
-}; 
+} 
 
-export default UserCard;
+export default UserCard

@@ -31,9 +31,13 @@ class Navbar extends React.Component {
 
   render() {
     const playPauseButton = (this.props.player.playing) ? 
-      <button onClick={this.handlePause}><img height={20} width={20} src='https://i.imgur.com/Qo6uE4L.png' alt='Pause'/></button>
+      <button onClick={this.handlePause}>
+        <img height={20} width={20} src='https://i.imgur.com/Qo6uE4L.png' alt='Pause'/>
+      </button>
     :
-      <button onClick={this.handlePlay}><img height={20} width={20} src='https://i.imgur.com/NTz3SDu.png' alt='Play'/></button>
+      <button onClick={this.handlePlay}>
+        <img height={20} width={20} src='https://i.imgur.com/NTz3SDu.png' alt='Play'/>
+      </button>
     ;
 
     return (
@@ -50,7 +54,9 @@ class Navbar extends React.Component {
             <li id='player'>
               <div>
                 {playPauseButton}
-                <button onClick={this.handleStop}><img height={20} width={20} src='https://i.imgur.com/unx98ZO.png' alt='Stop'/></button>
+                <button onClick={this.handleStop}>
+                  <img height={20} width={20} src='https://i.imgur.com/unx98ZO.png' alt='Stop'/>
+                </button>
               </div>
             </li>
           : null}

@@ -1,11 +1,18 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom'; 
+import React from 'react'
+import { NavLink } from 'react-router-dom' 
 
 class ChoreographiesCard extends React.Component {
   render() {
 
     const choreographies = this.props.choreographies.slice(0,15).map((choreo, i) => {
-      return <li key={i}><NavLink className='link' to={`/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}</NavLink></li>
+      return (
+        <li key={i}>
+          <NavLink 
+            className='link' 
+            to={`/choreographies/${choreo.id}`}>{choreo.name || 'no-name'}
+          </NavLink>
+        </li>
+      )
     })
 
     return (
@@ -21,6 +28,6 @@ class ChoreographiesCard extends React.Component {
       </div> 
     )
   }
-}; 
+}
 
-export default ChoreographiesCard;
+export default ChoreographiesCard

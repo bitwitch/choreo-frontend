@@ -1,10 +1,14 @@
-import React from 'react'; 
-import { NavLink } from 'react-router-dom'; 
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 class AllFriends extends React.Component {
   render() {
     const friends = this.props.friends.map((friend, i) => {
-      return <li key={i}><NavLink to={`/friends/${friend.id}`}>{friend.name || 'no-name'}</NavLink></li>
+      return (
+        <li key={i}>
+          <NavLink to={`/friends/${friend.id}`}>{friend.name || 'no-name'}</NavLink>
+        </li>
+      )
     })
 
     return (
@@ -16,6 +20,6 @@ class AllFriends extends React.Component {
       </div> 
     )
   }
-}; 
+}
 
-export default AllFriends;
+export default AllFriends

@@ -1,6 +1,6 @@
-import React from 'react'; 
-import ModalWrapper from './ModalWrapper'; 
-import '../style/AuthModal.css';
+import React from 'react' 
+import ModalWrapper from './ModalWrapper' 
+import '../style/AuthModal.css'
 
 class LoginModal extends React.Component {
 
@@ -30,13 +30,25 @@ class LoginModal extends React.Component {
     return (
       <ModalWrapper title='Login' width={300} showOk={false} {...this.props}>
         <form onSubmit={this.handleSubmit}> 
-          <input className='input' type='text' onChange={this.handleUsername} placeholder='username' value={this.state.username}/>
-          <input className='input' type='password' onChange={this.handlePassword} placeholder='password' value={this.state.password}/>
+          <input 
+            className='input' 
+            type='text' 
+            onChange={this.handleUsername} 
+            placeholder='username' 
+            value={this.state.username}
+          />
+          <input 
+            className='input' 
+            type='password' 
+            onChange={this.handlePassword} 
+            placeholder='password' 
+            value={this.state.password}
+          />
           <input className='submit' type='submit' value='Login'/>
         </form>
       </ModalWrapper> 
     )
   }
-}; 
+}
 
-export default LoginModal;
+export default LoginModal

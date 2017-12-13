@@ -1,10 +1,10 @@
 export default function poseReducer(state={list: [], currentPose: []}, action) {
   switch(action.type) {
     case 'ADD_POSE': 
-      return {...state, list: [...state.list, action.payload]};
+      return {...state, list: [...state.list, action.payload]}
 
     case 'REMOVE_POSE':
-      return {...state, list: state.list.filter(pose => pose.id !== action.payload) };
+      return {...state, list: state.list.filter(pose => pose.id !== action.payload) }
 
     case 'SET_CURRENT_POSE':
       return {...state, currentPose: action.payload}
@@ -27,6 +27,6 @@ export default function poseReducer(state={list: [], currentPose: []}, action) {
       return {list: [], currentPose: []}
 
     default: 
-      return state; 
+      return state
   }
 }
