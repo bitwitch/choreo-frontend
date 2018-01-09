@@ -45,7 +45,7 @@ class PlaybackContainer extends React.Component {
   }
 
   resizePose = (lines) => {
-    let i = 0;
+    let i = 0
     return lines.map(line => {
       if (line.type === 'Ellipse') {
         const newCenterX = line.props.x * 2
@@ -62,16 +62,23 @@ class PlaybackContainer extends React.Component {
         )
       } else {
         const newPoints = line.props.points.map(point => point*2)
-        return <Line key={++i} points={newPoints} stroke='#000' strokeWidth={4} />
+        return (
+          <Line 
+            key={++i} 
+            points={newPoints} 
+            stroke='#000' 
+            strokeWidth={4} 
+          />
+        )
       }
     })
   }
 
   playbackTimer = () => {
     if (!this.state.playing) return false
-
+    const counter = this.state.frameCounter 
     const timeInterval = (100 - this.state.playbackSpeed) * 10
-    const newFrameCount = this.state.frameCounter >= this.state.frames.length - 1 ? 0 : this.state.frameCounter + 1
+    const newFrameCount = (counter >= this.state.frames.length - 1) ? 0 : counter + 1
     this.setState({frameCounter: newFrameCount})
     this.timeout = setTimeout(this.playbackTimer, timeInterval)
   }
@@ -130,7 +137,7 @@ class PlaybackContainer extends React.Component {
           </button>
         </div>
 
-        <Slider 
+        <Slider
           onChange={this.handlePlaybackSpeed} 
           min={0} 
           max={100} 

@@ -9,10 +9,11 @@ import { setAccessTokens } from '../actions/auth'
 import { addPlayer, play } from '../actions/player'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Script from 'react-load-script' 
+import Script from 'react-load-script'
 import '../style/CreatorContainer.css'
 
 class CreatorContainer extends React.Component {
+
   state = {
     songTitle: '',
     songs: [],
@@ -95,10 +96,9 @@ class CreatorContainer extends React.Component {
     const {tempo} = this.state.currentSong
     const timeInterval =  1 / (tempo / 60000)
     const playbackSpeed = Math.round( 100 - (timeInterval / 10) )
-    this.setState({switch: !this.state.switch}, () => 
-      this.setState({
-        playbackSpeed
-      }))
+    this.setState(
+      {switch: !this.state.switch}, () => this.setState({playbackSpeed})
+    )
   }
 
   handleScriptError = () => {
@@ -107,38 +107,44 @@ class CreatorContainer extends React.Component {
 
   handleScriptLoad = () => {
     const token = this.props.tokens.access
-    const player = new window.Spotify.Player({
-      name: 'Shaker Maker Player',
-      getOAuthToken: cb => { cb(token) }
+    const interval = setInterval(() => {
+      if ('Spotify' in window) {
+        clearInterval(interval)
+
+        const player = new window.Spotify.Player({
+          name: 'Shaker Maker Player',
+          getOAuthToken: cb => { cb(token) }
+        })
+
+        // Error handling
+        player.on('initialization_error', e => console.error(e))
+        player.on('authentication_error', e => console.error(e))
+        player.on('account_error', e => console.error(e))
+        player.on('playback_error', e => console.error(e))
+
+        // Playback status updates
+        player.on('player_state_changed', state => console.log('player state: ', state))
+
+        // Ready
+        player.on('ready', data => {
+          console.log('Ready with Device ID', data.device_id)
+        })
+
+        player.on("player_state_ready", function (playbackState) {
+          const current_track = playbackState.track_window.current_track;
+          const current_position = playbackState.position;
+          const current_song_duration = playbackState.duration;
+
+          console.log("Currently Playing", current_track);
+          console.log("Position in Song", current_position);
+          console.log("Duration of Song", current_song_duration);
+        })
+
+        player.connect()
+
+        this.props.addPlayer(player)
+      }
     })
-
-    // Error handling
-    player.on('initialization_error', e => console.error(e))
-    player.on('authentication_error', e => console.error(e))
-    player.on('account_error', e => console.error(e))
-    player.on('playback_error', e => console.error(e))
-
-    // Playback status updates
-    player.on('player_state_changed', state => console.log('player state: ', state))
-
-    // Ready
-    player.on('ready', data => {
-      console.log('Ready with Device ID', data.device_id)
-    })
-
-    player.on("player_state_ready", function (playbackState) {
-      const current_track = playbackState.track_window.current_track;
-      const current_position = playbackState.position;
-      const current_song_duration = playbackState.duration;
-
-      console.log("Currently Playing", current_track);
-      console.log("Position in Song", current_position);
-      console.log("Duration of Song", current_song_duration);
-    });
-
-    player.connect()
-
-    this.props.addPlayer(player)
   }
 
   render() {
